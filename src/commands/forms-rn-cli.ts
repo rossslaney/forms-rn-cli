@@ -4,7 +4,7 @@ import { IgniteRNInstallResult } from '../types'
 
 
 const command: GluegunCommand = {
-  name: 'forms-rn-cli',
+  name: 'init',
   run: async toolbox => {
     const { parameters, print, reactNative } = toolbox
     const name = parameters.first
