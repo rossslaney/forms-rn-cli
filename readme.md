@@ -1,41 +1,45 @@
-# forms-rn-cli CLI
+# forms-rn-cli
 
-A CLI for forms-rn-cli.
+A scaffolding CLI for React-Redux applications in React Native. Inspired by ASP.NET Web Forms - We think that the mental model for programming front-end should be simple and event driven. Each 'Screen' or 'Container' has a 'codebehind' file where you define the function available to that front-end component as well as what connections that component will have to the state tree.
 
-forms-rn-cli
-Creates a new FormsRN Application
-Installs dependencies for a React-Redux-ReduxRouter RN App
-Updates the App.TSX file to create the demo screen and containers
--AuthService
--EntityService
--SplashScreen
--MoreInfoScreen
--ScreenHeaderContainer
+## Create a New FormsRN Project
 
-add-component will create a 'dumb' TSX component that can be plugged into Screens or Containers
-add-container will create a Container in Containers/[name]/[name].tsx
-add-screen will create a Screen in Screens/[name]/[name]
-add-service will create a Service that implements IController in Services/[name]/[name]
-create-controller-codebehind-function will add a 'codebehind' function accessed from the front-end implementation via "this.props.[functionName](this.props)"
-create-controller-connection-to-store will connect the Controller file state to another controller
+> forms-rn-cli [projectname]
 
-## Customizing your CLI
+The starter app will come with the following pre-configured:
 
-Check out the documentation at https://github.com/infinitered/gluegun/tree/master/docs.
+> AuthService
+> EntityService
+> SplashScreen
+> MoreInfoScreen
+> HomeScreen
+> ScreenHeaderContainer
 
-## Publishing to NPM
+## Add a 'Screen'
 
-To package your CLI up for NPM, do this:
+## Add a 'Container'
 
-```shell
-$ npm login
-$ npm whoami
-$ npm lint
-$ npm test
-(if typescript, run `npm run build` here)
-$ npm publish
-```
+## Add a 'DumbComponent'
 
-# License
+## Add a 'Service'
 
-MIT - see LICENSE
+## Create a 'CodeBehind Function'
+
+Make a function available from the codebehind to the front-end:
+
+> forms-rn-cli create-codebehind-function [NameOfCodeBehindFile][nameoffunction]
+
+To use the new function:
+
+> onPress={() => {nameOfFunction(props)}}
+
+## Create a 'CodeBehind Connection'
+
+Connect the codebehind to the State Tree. To ensure performance it is best practice to keep connections to the fewest needed for the component to work.
+
+> forms-rn-cli create-codebehind-connection [NameOfCodeBehindFile][nameofcodebehindfiletoconnectto]
+
+## Using the ReduxRouter Navigation
+
+> Add the scene to the nav tree in App.tsx
+> Actions.ScreenName() or Actions.push('ScreenName') is available from any codebehind file.

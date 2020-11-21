@@ -17,7 +17,6 @@ const command: GluegunCommand = {
     print.info('🍽 Time to get building!')
     print.info('')
     print.info('To run in iOS:')
-    print.info('    Xcode -> File.xcworkspace -> Workspace Settings -> Build System -> Legacy Build System.    ')
     print.info(`  cd ${name}`)
     print.info('  npx react-native run-ios')
     print.info('')
