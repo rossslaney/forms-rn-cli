@@ -13,7 +13,7 @@ The starter app will come with the following pre-configured:
 > SplashScreen -> 'Screen' demo of a typical splash screen an entry point for your new FormsRN App.  
 > MoreInfoScreen -> 'Screen' demo to show non-restricted navigation from the Splash 'Screen'.  
 > HomeScreen -> 'Screen' demo requires an authenticated user to access this 'Screen' / demonstrates the codebehind connection to EntityService in SessionStore and displays the demo data entities.  
-> ScreenHeaderContainer -> 'Container' demo used to show a dynamic header on each 'Screen'
+> ScreenHeaderContainer -> 'Container' demo used to show a dynamic header on each 'Screen'  
 > DataCard -> 'DumbComponent' demo used to show a simple visual component
 
 ## Add a 'Screen'
