@@ -20,29 +20,33 @@ The starter app will come with the following pre-configured:
 
 Add a new 'Screen' and associated codebehind file connected to the SessionStore in App.tsx.
 
-> forms-rn-cli add-screen [NameOfScreen]  
-> Use the Navigation instructions below to place the 'Screen' in your NavTree.
+> forms-rn-cli add-screen [NameOfScreen]
+
+Use the Navigation instructions below to place the 'Screen' in your NavTree.
 
 ## Add a 'Container'
 
 Add a new 'Container' and associated codebehind file connected to the SessionStore in App.tsx.
 
-> forms-rn-cli add-container [NameOfContainer]  
-> Place the 'Container' anywhere in your application markup <[NameOfContainer] />
+> forms-rn-cli add-container [NameOfContainer]
+
+Place the 'Container' anywhere in your application markup <[NameOfContainer] />
 
 ## Add a 'DumbComponent'
 
 Add a new 'DumbComponent' - these are not connected to the SessionStore
 
-> forms-rn-cli add-component [NameOfDumbComponent]  
-> Place the 'DumbComponent' anywhere in your application markup <[NameOfDumbComponent] />
+> forms-rn-cli add-component [NameOfDumbComponent]
+
+Place the 'DumbComponent' anywhere in your application markup <[NameOfDumbComponent] />
 
 ## Add a 'Service'
 
 Add a new 'Service' - these are connected to the Session Store and have functions that can be called from other codebehind files but do not have a visual component.
 
-> forms-rn-cli add-service [NameOfService]  
-> Call the service from codebehind: var newEntityControllerState = await EntityController.Fetch_Entities(a,b,c,dispatch)
+> forms-rn-cli add-service [NameOfService]
+
+Call the service from codebehind: var newEntityControllerState = await EntityController.Fetch_Entities(a,b,c,dispatch)
 
 ## Create a 'CodeBehind Function'
 
@@ -62,8 +66,8 @@ Connect the codebehind to the State Tree. To ensure performance it is best pract
 
 ## Using the ReduxRouter Navigation
 
-> Add the scene to the nav tree in App.tsx
-> Actions.ScreenName() or Actions.push('ScreenName') is available from any codebehind file.
+Add the scene to the nav tree in App.tsx  
+Actions.ScreenName() or Actions.push('ScreenName') is available from any codebehind file.
 
 ## Terminology
 
