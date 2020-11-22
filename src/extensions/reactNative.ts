@@ -33,7 +33,7 @@ function attach(toolbox: IgniteToolbox) {
     const perfStart = new Date().getTime()
 
     // react-native init
-    const cmd = trim(`npx react-native init ${name}`)
+    const cmd = trim(`npx react-native init ${name} --template react-native-template-typescript`)
     const withTemplate = reactNativeTemplate ? ` with ${print.colors.cyan(reactNativeTemplate)} template` : ''
     const spinner = print.spin(
       `adding ${print.colors.cyan('React Native ' + reactNativeVersion)}${withTemplate} ${print.colors.muted(
@@ -71,10 +71,6 @@ function attach(toolbox: IgniteToolbox) {
       'React Native ' + reactNativeVersion,
     )}${withTemplate} in ${perfDuration}s`
     spinner.succeed(successMessage)
-
-    // jump immediately into the new directory
-    process.chdir(name)
-    print.info(`changed to directory ${process.cwd()}`)
     return {
       exitCode: exitCodes.OK,
       version: reactNativeVersion,
