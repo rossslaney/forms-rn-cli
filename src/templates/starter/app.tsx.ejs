@@ -1,4 +1,23 @@
 import React from 'react';
+
+import {createStore, applyMiddleware, combineReducers} from 'redux';
+import {Provider, connect} from 'react-redux';
+import {
+  Scene,
+  Actions,
+  Router,
+  Tabs,
+  Stack,
+  Drawer,
+  Modal,
+} from 'react-native-router-flux';
+import {
+  reduxifyNavigator,
+  createReactNavigationReduxMiddleware,
+  createNavigationReducer,
+} from 'react-navigation-redux-helpers';
+import thunkMiddleware from 'redux-thunk';
+import logger from 'redux-logger';
 import {
   SafeAreaView,
   StyleSheet,
@@ -7,7 +26,6 @@ import {
   Text,
   StatusBar,
 } from 'react-native';
-
 import {
   Header,
   LearnMoreLinks,
@@ -15,6 +33,11 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import {persistStore, persistCombineReducers} from 'redux-persist';
+
+import reducer from './nav-reducer.ts';
+
+
 
 declare const global: {HermesInternal: null | {}};
 

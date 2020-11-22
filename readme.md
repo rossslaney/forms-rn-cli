@@ -5,6 +5,8 @@ A scaffolding CLI for React-Redux applications in React Native. Inspired by ASP.
 ## Create a New FormsRN Project
 
 > forms-rn-cli init [ProjectName]
+> cd [ProjectName]  
+> forms-rn-cli convertToApp [ProjectName]
 
 The starter app will come with the following pre-configured:
 

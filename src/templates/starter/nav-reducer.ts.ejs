@@ -1,0 +1,17 @@
+
+
+export const initialState = {};
+  
+  export default (state = initialState, action = {}) => {
+    switch (action.type) {
+      // RNRF NAV FUNCTIONS
+      case 'Navigation/NAVIGATE':
+        return {
+          ...state,
+          scene: action.routeName,
+        };
+
+      default:
+        return state;
+    }
+  };
