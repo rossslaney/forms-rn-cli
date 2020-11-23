@@ -3,6 +3,7 @@ import {ActionConst, Actions} from 'react-native-router-flux';
 
 export interface <%=props.name%>State {
     // # put your component's state here
+    AddCount(props: <%=props.name%>State):void;
     VersionNumber: string;
     ScreenName: string;
     Count: number;
@@ -12,6 +13,7 @@ export default class <%=props.name%>_codebehind implements IScreenController {
 
     // ### put your component default state here 
     public CurrentState: <%=props.name%>State = {
+        AddCount : <%=props.name%>_codebehind.AddCount,
         VersionNumber: '0.0.1',
         ScreenName: '<%=props.name%>',
         Count: 0
@@ -26,17 +28,18 @@ export default class <%=props.name%>_codebehind implements IScreenController {
     }
 
     // ### put your codebehind-functions here - static functions implement business logic
-    public static AddCount(state: <%=props.name%>State, dispatch: any): void {
-        let NewState = state;
+    public static AddCount(state: <%=props.name%>State, dispatch?: any): void {
+      //@ts-ignore
+        let NewState = state.<%=props.name%>;
         NewState.Count += 1;
         // dispatch to parent store
           dispatch({
               type: '<%=props.name%>_Update',
               payload: {
-                NewSettings: <%=props.name%>_codebehind.AddCount(state, dispatch),
+                NewSettings: NewState,
               },
-            });
-      }
+        });
+    }
 
     // constructor
     public <%=props.name%>_codebehind(state: <%=props.name%>State){
@@ -56,14 +59,7 @@ export default class <%=props.name%>_codebehind implements IScreenController {
       // make functions available to the front-end
       public mapDispatchToProps = (dispatch: any) => {
         return {
-          AddCount: (state: <%=props.name%>State) => {
-            dispatch({
-              type: '<%=props.name%>_Update',
-              payload: {
-                NewSettings: <%=props.name%>_codebehind.AddCount(state, dispatch),
-              },
-            });
-          } 
+          AddCount: (state: <%=props.name%>State) => {<%=props.name%>_codebehind.AddCount(state, dispatch)} 
         }
       }
 }

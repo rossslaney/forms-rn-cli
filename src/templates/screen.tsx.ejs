@@ -37,7 +37,7 @@ const <%=props.name%>: React.FC<<%=props.name%>State> = (
           <Text
             style={{
               paddingBottom: actualDimensions.height / 12,
-              fontSize: actualDimensions.height / 40,
+              fontSize: actualDimensions.height / 60,
               fontWeight: 'bold',
               fontFamily: 'Gill Sans',
               color: '#ff6a00',
@@ -45,7 +45,7 @@ const <%=props.name%>: React.FC<<%=props.name%>State> = (
               textShadowOffset: {width: -1, height: 1},
               textShadowRadius: 3,
             }}>
-            FormsRN CLI
+            Screen : <%=props.name%>
           </Text>
           <View>
 
@@ -54,10 +54,10 @@ const <%=props.name%>: React.FC<<%=props.name%>State> = (
         <View style={{height: actualDimensions.height / 65}} />
         <View>
           <TouchableOpacity
-            onPress={() => { console.log('pressed') }}
+            onPress={() => { props.AddCount(props) }}
             style={{
               width: actualDimensions.width / 1.1,
-              height: actualDimensions.height / 12,
+              height: actualDimensions.height / 20,
               shadowOpacity: 0.3,
               alignSelf: 'center',
               backgroundColor: '#ff6a00',
@@ -69,57 +69,15 @@ const <%=props.name%>: React.FC<<%=props.name%>State> = (
             <Text
               style={{
                 fontFamily: 'Gill Sans',
-                fontSize: 22,
+                fontSize: 15,
                 color: 'white',
                 fontWeight: 'bold',
               }}>
-              Sign In / Sign Up
+              press to test codebehind action
             </Text>
           </TouchableOpacity>
           <View style={{height: actualDimensions.height / 30}} />
   
-          <TouchableOpacity
-            style={{
-              width: actualDimensions.width / 1.25,
-              height: actualDimensions.height / 25,
-              alignSelf: 'center',
-            }}
-            onPress={() => {
-              console.log('more information button pressed');
-            }}>
-            <CardView
-              cardElevation={3}
-              cardMaxElevation={3}
-              cornerRadius={5}
-              style={{
-                alignItems: 'center',
-                justifyContent: 'center',
-                alignSelf: 'center',
-                height: '100%',
-                width: '100%',
-                backgroundColor: '#ffffef',
-                margin: 5,
-                flexDirection: 'row',
-              }}>
-              <View style={{flex: 1}} />
-  
-              <Text
-                style={{
-                  flex: 1.6,
-                  alignItems: 'center',
-                  fontFamily: 'Gill Sans',
-                }}>
-                More Information
-              </Text>
-  
-              <View
-                style={{
-                  margin: '0.5%',
-                }}>
-              </View>
-            </CardView>
-          </TouchableOpacity>
-          <View style={{height: actualDimensions.height / 30}} />
         </View>
         <Text
           style={{
@@ -128,7 +86,7 @@ const <%=props.name%>: React.FC<<%=props.name%>State> = (
             color: 'grey',
             alignSelf: 'center',
           }}>
-          Developed with Forms RN Scaffolding CLI
+          <%=props.name%> Screen initiated with Forms RN Scaffolding CLI
         </Text>
       </View>
     );

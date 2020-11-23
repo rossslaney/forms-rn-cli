@@ -38,14 +38,14 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import {persistStore, persistCombineReducers} from 'redux-persist';
 
-// import starter template files
+// #### import the application files here 
 import reducer from './nav-reducer';
 import Splash from './Screens/Splash/Splash'
 import Splash_codebehind from './Screens/Splash/Splash.codebehind'
 
 declare const global: {HermesInternal: null | {}};
 
-// ### add the 'Screen''s here to the NavTree
+// #### add the 'Screen''s here to the NavTree
 const AppNavigator : any = Actions.create(
 <Scene key="root" hideNavBar swipeEnabled={false} gestureEnabled={false}>
     <Modal key="Splash" initial={true}>
@@ -73,15 +73,13 @@ const config : any = {
   timeout: null, // The code base checks for falsy, so 0 disables
 };
 
-// ### Add the codebehind files here
+// #### Add the codebehind files here
 let splash_controller = new Splash_codebehind();
-
 const appReducer = persistCombineReducers(config, {
     nav: navReducer,
     Splash: splash_controller.reducer,
   }
 );
-  
 const mapStateToProps = (state:any) => {
     return {
       state: state.nav,
