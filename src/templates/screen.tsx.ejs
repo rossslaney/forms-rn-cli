@@ -1,0 +1,143 @@
+import React from 'react';
+import {
+  Button,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  ImageBackground,
+  ScrollView,
+} from 'react-native';
+import {Provider, connect} from 'react-redux';
+import {Actions} from 'react-native-router-flux';
+
+//@ts-ignore
+import CardView from 'react-native-cardview';
+import { <%=props.name%>State } from './<%=props.name%>.codebehind';
+import <%=props.name%>_codebehind from './<%=props.name%>.codebehind';
+import actualDimensions from '../../util/dimensions';
+
+const <%=props.name%>: React.FC<<%=props.name%>State> = (
+    props: <%=props.name%>State,
+  ) => {
+    return (
+      <View style={{height: '100%', width: '100%'}}>
+        <Text style={{position: 'absolute', top: 35, right: 25}}>
+          {props.VersionNumber}
+        </Text>
+        <View style={{height: actualDimensions.height / 30}} />
+        <View
+          style={{
+            height: actualDimensions.height / 2.5,
+            margin: actualDimensions.width / 4,
+            marginBottom: actualDimensions.height / 15,
+            alignItems: 'center',
+          }}>
+          <Text
+            style={{
+              paddingBottom: actualDimensions.height / 12,
+              fontSize: actualDimensions.height / 40,
+              fontWeight: 'bold',
+              fontFamily: 'Gill Sans',
+              color: '#ff6a00',
+              textShadowColor: 'rgba(0, 0, 0, 0.75)',
+              textShadowOffset: {width: -1, height: 1},
+              textShadowRadius: 3,
+            }}>
+            FormsRN CLI
+          </Text>
+          <View>
+
+          </View>
+        </View>
+        <View style={{height: actualDimensions.height / 65}} />
+        <View>
+          <TouchableOpacity
+            onPress={() => { console.log('pressed') }}
+            style={{
+              width: actualDimensions.width / 1.1,
+              height: actualDimensions.height / 12,
+              shadowOpacity: 0.3,
+              alignSelf: 'center',
+              backgroundColor: '#ff6a00',
+              justifyContent: 'center',
+              alignItems: 'center',
+              margin: actualDimensions.width / 25,
+              borderRadius: 20,
+            }}>
+            <Text
+              style={{
+                fontFamily: 'Gill Sans',
+                fontSize: 22,
+                color: 'white',
+                fontWeight: 'bold',
+              }}>
+              Sign In / Sign Up
+            </Text>
+          </TouchableOpacity>
+          <View style={{height: actualDimensions.height / 30}} />
+  
+          <TouchableOpacity
+            style={{
+              width: actualDimensions.width / 1.25,
+              height: actualDimensions.height / 25,
+              alignSelf: 'center',
+            }}
+            onPress={() => {
+              console.log('more information button pressed');
+            }}>
+            <CardView
+              cardElevation={3}
+              cardMaxElevation={3}
+              cornerRadius={5}
+              style={{
+                alignItems: 'center',
+                justifyContent: 'center',
+                alignSelf: 'center',
+                height: '100%',
+                width: '100%',
+                backgroundColor: '#ffffef',
+                margin: 5,
+                flexDirection: 'row',
+              }}>
+              <View style={{flex: 1}} />
+  
+              <Text
+                style={{
+                  flex: 1.6,
+                  alignItems: 'center',
+                  fontFamily: 'Gill Sans',
+                }}>
+                More Information
+              </Text>
+  
+              <View
+                style={{
+                  margin: '0.5%',
+                }}>
+              </View>
+            </CardView>
+          </TouchableOpacity>
+          <View style={{height: actualDimensions.height / 30}} />
+        </View>
+        <Text
+          style={{
+            position: 'absolute',
+            bottom: 10,
+            color: 'grey',
+            alignSelf: 'center',
+          }}>
+          Developed with Forms RN Scaffolding CLI
+        </Text>
+      </View>
+    );
+  };
+  
+  let codebehind = new <%=props.name%>_codebehind();
+  export default connect(
+    codebehind.mapStateToProps,
+    codebehind.mapDispatchToProps,
+  )(<%=props.name%>);
+
+

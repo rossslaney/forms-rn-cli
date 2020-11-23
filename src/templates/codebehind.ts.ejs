@@ -1,0 +1,69 @@
+import IScreenController from '../../types';
+import {ActionConst, Actions} from 'react-native-router-flux';
+
+export interface <%=props.name%>State {
+    // # put your component's state here
+    VersionNumber: string;
+    ScreenName: string;
+    Count: number;
+}
+
+export default class <%=props.name%>_codebehind implements IScreenController {
+
+    // ### put your component default state here 
+    public CurrentState: <%=props.name%>State = {
+        VersionNumber: '0.0.1',
+        ScreenName: '<%=props.name%>',
+        Count: 0
+    }
+
+    // ### connect to the SessionStore here (as little as possible for performance)
+    public mapStateToProps = (SessionStore: any, ownProps: any) => {
+        return {
+            <%=props.name%>: SessionStore.<%=props.name%>,
+            root: SessionStore.root,
+        }
+    }
+
+    // ### put your codebehind-functions here - static functions implement business logic
+    public static AddCount(state: <%=props.name%>State, dispatch: any): void {
+        let NewState = state;
+        NewState.Count += 1;
+        // dispatch to parent store
+          dispatch({
+              type: '<%=props.name%>_Update',
+              payload: {
+                NewSettings: <%=props.name%>_codebehind.AddCount(state, dispatch),
+              },
+            });
+      }
+
+    // constructor
+    public <%=props.name%>_codebehind(state: <%=props.name%>State){
+        this.CurrentState = state;
+    }
+
+    // listen to Update_<%=props.name%> dispatches
+    public reducer = (state = this.CurrentState, action: any = {type: {}, payload: {}}) => {
+        switch (action.type) {
+          case '<%=props.name%>_Update':
+            return {...action.payload.NewSettings};
+          default:
+            return state;
+        }
+      };
+
+      // make functions available to the front-end
+      public mapDispatchToProps = (dispatch: any) => {
+        return {
+          AddCount: (state: <%=props.name%>State) => {
+            dispatch({
+              type: '<%=props.name%>_Update',
+              payload: {
+                NewSettings: <%=props.name%>_codebehind.AddCount(state, dispatch),
+              },
+            });
+          } 
+        }
+      }
+}

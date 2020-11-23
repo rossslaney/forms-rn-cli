@@ -3,6 +3,7 @@ import {ActionConst, Actions} from 'react-native-router-flux';
 
 export interface SplashState {
     // # put your component's state here
+    AddCount(props: SplashState):void;
     VersionNumber: string;
     ScreenName: string;
     Count: number;
@@ -12,6 +13,7 @@ export default class Splash_codebehind implements IScreenController {
 
     // ### put your component default state here 
     public CurrentState: SplashState = {
+        AddCount : Splash_codebehind.AddCount,
         VersionNumber: '0.0.1',
         ScreenName: 'Splash',
         Count: 0
@@ -26,17 +28,18 @@ export default class Splash_codebehind implements IScreenController {
     }
 
     // ### put your codebehind-functions here - static functions implement business logic
-    public static AddCount(state: SplashState, dispatch: any): void {
-        let NewState = state;
+    public static AddCount(state: SplashState, dispatch?: any): void {
+      //@ts-ignore
+        let NewState = state.Splash;
         NewState.Count += 1;
         // dispatch to parent store
           dispatch({
               type: 'Splash_Update',
               payload: {
-                NewSettings: Splash_codebehind.AddCount(state, dispatch),
+                NewSettings: NewState,
               },
-            });
-      }
+        });
+    }
 
     // constructor
     public Splash_codebehind(state: SplashState){
@@ -56,14 +59,7 @@ export default class Splash_codebehind implements IScreenController {
       // make functions available to the front-end
       public mapDispatchToProps = (dispatch: any) => {
         return {
-          AddCount: (state: SplashState) => {
-            dispatch({
-              type: 'Splash_Update',
-              payload: {
-                NewSettings: Splash_codebehind.AddCount(state, dispatch),
-              },
-            });
-          } 
+          AddCount: (state: SplashState) => {Splash_codebehind.AddCount(state, dispatch)} 
         }
       }
 }

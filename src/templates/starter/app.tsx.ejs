@@ -79,7 +79,6 @@ let splash_controller = new Splash_codebehind();
 const appReducer = persistCombineReducers(config, {
     nav: navReducer,
     Splash: splash_controller.reducer,
-    reducer
   }
 );
   
@@ -87,7 +86,6 @@ const mapStateToProps = (state:any) => {
     return {
       state: state.nav,
       Splash: splash_controller.reducer,
-      reducer
     };
 }
 

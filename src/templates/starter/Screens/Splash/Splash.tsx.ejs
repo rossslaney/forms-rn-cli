@@ -85,7 +85,7 @@ const Splash: React.FC<SplashState> = (
               alignSelf: 'center',
             }}
             onPress={() => {
-              console.log('more information button pressed');
+              props.AddCount(props);
             }}>
             <CardView
               cardElevation={3}
