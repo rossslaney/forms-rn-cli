@@ -7,6 +7,11 @@ A scaffolding CLI for React-Redux applications in React Native. Inspired by ASP.
 > forms-rn-cli init [ProjectName]
 > cd [ProjectName]  
 > forms-rn-cli convertToApp [ProjectName]
+> cd ios  
+> pod install  
+> cd ..  
+> npx react-native start --reset-cache  
+> npx react-native run-ios
 
 The starter app will come with the following pre-configured:
 

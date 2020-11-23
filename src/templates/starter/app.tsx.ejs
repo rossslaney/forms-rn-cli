@@ -11,11 +11,13 @@ import {
   Drawer,
   Modal,
 } from 'react-native-router-flux';
+//@ts-ignore
 import {
   reduxifyNavigator,
   createReactNavigationReduxMiddleware,
   createNavigationReducer,
 } from 'react-navigation-redux-helpers';
+//@ts-ignore
 import thunkMiddleware from 'redux-thunk';
 import logger from 'redux-logger';
 import {
@@ -25,6 +27,7 @@ import {
   View,
   Text,
   StatusBar,
+  AsyncStorage
 } from 'react-native';
 import {
   Header,
@@ -35,33 +38,90 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import {persistStore, persistCombineReducers} from 'redux-persist';
 
-import reducer from './nav-reducer.ts';
-
-
+// import starter template files
+import reducer from './nav-reducer';
+import Splash from './Screens/Splash/Splash'
+import Splash_codebehind from './Screens/Splash/Splash.codebehind'
 
 declare const global: {HermesInternal: null | {}};
 
-const App = () => {
+// ### add the 'Screen''s here to the NavTree
+const AppNavigator : any = Actions.create(
+<Scene key="root" hideNavBar swipeEnabled={false} gestureEnabled={false}>
+    <Modal key="Splash" initial={true}>
+      <Scene initial={true} component={Splash} hideNavBar />
+    </Modal>
+</Scene>
+);
+
+// default nav reducer
+const initialState = AppNavigator.router.getStateForAction(
+  AppNavigator.router.getActionForPathAndParams('splash'),
+);
+const navReducer = (state = initialState, action: any) => {
+  const nextState = AppNavigator.router.getStateForAction(action, state);
+  // Simply return the original `state` if `nextState` is null or undefined.
+  return nextState || state;
+};
+
+// persist config
+// https://blog.reactnativecoach.com/the-definitive-guide-to-redux-persist-84738167975
+const config : any = {
+  key: 'Auth',
+  whitelist: ['Auth'],
+  storage: AsyncStorage,
+  timeout: null, // The code base checks for falsy, so 0 disables
+};
+
+// ### Add the codebehind files here
+let splash_controller = new Splash_codebehind();
+
+const appReducer = persistCombineReducers(config, {
+    nav: navReducer,
+    Splash: splash_controller.reducer,
+    reducer
+  }
+);
+  
+const mapStateToProps = (state:any) => {
+    return {
+      state: state.nav,
+      Splash: splash_controller.reducer,
+      reducer
+    };
+}
+
+const middleware = createReactNavigationReduxMiddleware('root',
+    (state : any) => state.nav,
+);
+const ReduxNavigator = reduxifyNavigator(AppNavigator, 'root');
+
+const ReduxRouter : any = connect(mapStateToProps)(Router as any);
+
+const store = createStore(
+  appReducer,
+  applyMiddleware(middleware, thunkMiddleware, logger),
+);
+
+const persistor = persistStore(store, null, () => {
+    store.getState(); // if you want to get restoredState
+});
+  
+// uncomment to clear the local storage
+persistor.purge();
+
+const Application = () => {
   return (
-    <>
-      <StatusBar barStyle="dark-content" />
-      <SafeAreaView>
-        <ScrollView
-          contentInsetAdjustmentBehavior="automatic"
-          style={styles.scrollView}>
-          <Text>
-            Welcome to <%= props.name %>
-          </Text>
-        </ScrollView>
-      </SafeAreaView>
-    </>
+    <View style={{height: '100%', width: '100%'}}>
+        <Provider store={store}>
+          <ReduxRouter navigator={ReduxNavigator} />
+        </Provider>
+    </View>
   );
 };
 
-const styles = StyleSheet.create({
-  scrollView: {
-    backgroundColor: 'blue',
-  }
-});
-
+const App = Application;
+// eventually add codepush...
+// const App = codePush(Application);
 export default App;
+
