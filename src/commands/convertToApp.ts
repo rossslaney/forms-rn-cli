@@ -110,9 +110,9 @@ const command: GluegunCommand = {
     })
 
     await template.generate({
-      template: '/starter/appsettings.json.ejs',
+      template: '/starter/appsettings.ts.ejs',
       // target: `${name}/nav-reducer.ts`,
-      target: `appsettings.json`,
+      target: `appsettings.ts`,
       props: { name }
     })
 
