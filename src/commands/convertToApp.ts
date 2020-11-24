@@ -101,6 +101,21 @@ const command: GluegunCommand = {
         props: { name }
       })
 
+
+    await template.generate({
+      template: '/starter/.gitignore.ejs',
+      // target: `${name}/nav-reducer.ts`,
+      target: `.gitignore`,
+      props: { name }
+    })
+
+    await template.generate({
+      template: '/starter/appsettings.json.ejs',
+      // target: `${name}/nav-reducer.ts`,
+      target: `appsettings.json`,
+      props: { name }
+    })
+
       // generate the app.tsx last to wire together all of the codebehind files 
     await template.generate({
         template: '/starter/app.tsx.ejs',

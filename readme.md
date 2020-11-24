@@ -1,6 +1,6 @@
 # forms-rn-cli
 
-A scaffolding CLI for React-Redux applications in React Native. Inspired by ASP.NET Web Forms - Each 'Screen' or 'Container' has a 'codebehind' file where you define the function available to that front-end component as well as what connections that component will have to the SessionStore.
+A react-redux cli tool for react native scaffolding. Opinionated CLI for React-Redux applications in React Native that aims to take away the boilerplate from developing react-redux applications. Inspired by ASP.NET Web Forms - Each 'Screen' or 'Container' has a 'codebehind' file where you define the function available to that front-end component as well as what connections that component will have to the SessionStore.
 
 ## Create a New FormsRN Project
 
