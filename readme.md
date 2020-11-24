@@ -67,7 +67,8 @@ To use the new function:
 
 Connect the codebehind to the State Tree. To ensure performance it is best practice to keep connections to the fewest needed for the component to work.
 
-> forms-rn-cli create-codebehind-connection [NameOfCodeBehindFile][nameofcodebehindfiletoconnectto]
+> forms-rn-cli create-codebehind-connection [NameOfCodeBehindFile][nameofcodebehindfiletoconnectto]  
+> e.g. : forms-rn-cli create-codebehind-connection ./Screens/Home/Home.codebehind.ts Entity ../../services/entity/entity.codebehind
 
 ## Using the ReduxRouter Navigation
 
