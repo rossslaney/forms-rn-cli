@@ -14,12 +14,12 @@ import {Actions} from 'react-native-router-flux';
 
 //@ts-ignore
 import CardView from 'react-native-cardview';
-import { HomeState } from './Home.codebehind';
-import Home_codebehind from './Home.codebehind';
+import { MoreInformationState } from './MoreInformation.codebehind';
+import MoreInformation_codebehind from './MoreInformation.codebehind';
 import actualDimensions from '../../util/dimensions';
 
-const Home: React.FC<HomeState> = (
-    props: HomeState,
+const MoreInformation: React.FC<MoreInformationState> = (
+    props: MoreInformationState,
   ) => {
     return (
       <View style={{height: '100%', width: '100%'}}>
@@ -45,7 +45,7 @@ const Home: React.FC<HomeState> = (
               textShadowOffset: {width: -1, height: 1},
               textShadowRadius: 3,
             }}>
-            Screen : Home
+            Screen : MoreInformation
           </Text>
           <View>
 
@@ -86,16 +86,16 @@ const Home: React.FC<HomeState> = (
             color: 'grey',
             alignSelf: 'center',
           }}>
-          Home Screen initiated with Forms RN Scaffolding CLI
+          MoreInformation Screen initiated with Forms RN Scaffolding CLI
         </Text>
       </View>
     );
   };
   
-  let codebehind = new Home_codebehind();
+  let codebehind = new MoreInformation_codebehind();
   export default connect(
     codebehind.mapStateToProps,
     codebehind.mapDispatchToProps,
-  )(Home);
+  )(MoreInformation);
 
 

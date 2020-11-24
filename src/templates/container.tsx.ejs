@@ -1,0 +1,45 @@
+import React from 'react';
+import {
+  Button,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  ImageBackground,
+  ScrollView,
+} from 'react-native';
+import {Provider, connect} from 'react-redux';
+import {Actions} from 'react-native-router-flux';
+
+//@ts-ignore
+import CardView from 'react-native-cardview';
+import { <%=props.name%>State } from './<%=props.name%>.codebehind';
+import <%=props.name%>_codebehind from './<%=props.name%>.codebehind';
+import actualDimensions from '../../util/dimensions';
+
+const <%=props.name%>: React.FC<<%=props.name%>State> = (
+    props: <%=props.name%>State,
+  ) => {
+    return (
+      <View style={{height: '15%', width: '100%', borderWidth: 1, backgroundColor: 'yellow'}}>
+        <Text
+          style={{
+            position: 'absolute',
+            bottom: 10,
+            color: 'grey',
+            alignSelf: 'center',
+          }}>
+          <%=props.name%> Container
+        </Text>
+      </View>
+    );
+  };
+  
+  let codebehind = new <%=props.name%>_codebehind();
+  export default connect(
+    codebehind.mapStateToProps,
+    codebehind.mapDispatchToProps,
+  )(<%=props.name%>);
+
+

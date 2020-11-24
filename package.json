@@ -31,7 +31,8 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "gluegun": "latest"
+    "gluegun": "latest",
+    "replace-in-file": "^6.1.0"
   },
   "devDependencies": {
     "@types/node": "^12.7.11",

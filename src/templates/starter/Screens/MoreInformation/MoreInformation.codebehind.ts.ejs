@@ -1,40 +1,40 @@
 import IScreenController from '../../types';
 import {ActionConst, Actions} from 'react-native-router-flux';
 
-export interface HomeState {
+export interface MoreInformationState {
     // # put your component's state here
-    AddCount(props: HomeState):void;
+    AddCount(props: MoreInformationState):void;
     VersionNumber: string;
     ScreenName: string;
     Count: number;
 }
 
-export default class Home_codebehind implements IScreenController {
+export default class MoreInformation_codebehind implements IScreenController {
 
     // ### put your component default state here 
-    public CurrentState: HomeState = {
-        AddCount : Home_codebehind.AddCount,
+    public CurrentState: MoreInformationState = {
+        AddCount : MoreInformation_codebehind.AddCount,
         VersionNumber: '0.0.1',
-        ScreenName: 'Home',
+        ScreenName: 'MoreInformation',
         Count: 0
     }
 
     // ### connect to the SessionStore here (as little as possible for performance)
     public mapStateToProps = (SessionStore: any, ownProps: any) => {
         return {
-            Home: SessionStore.Home,
+            MoreInformation: SessionStore.MoreInformation,
             root: SessionStore.root,
         }
     }
 
     // ### put your codebehind-functions here - static functions implement business logic
-    public static AddCount(state: HomeState, dispatch?: any): void {
+    public static AddCount(state: MoreInformationState, dispatch?: any): void {
       //@ts-ignore
-        let NewState = state.Home;
+        let NewState = state.MoreInformation;
         NewState.Count += 1;
         // dispatch to parent store
           dispatch({
-              type: 'Home_Update',
+              type: 'MoreInformation_Update',
               payload: {
                 NewSettings: NewState,
               },
@@ -42,14 +42,14 @@ export default class Home_codebehind implements IScreenController {
     }
 
     // constructor
-    public Home_codebehind(state: HomeState){
+    public MoreInformation_codebehind(state: MoreInformationState){
         this.CurrentState = state;
     }
 
-    // listen to Update_Home dispatches
+    // listen to Update_MoreInformation dispatches
     public reducer = (state = this.CurrentState, action: any = {type: {}, payload: {}}) => {
         switch (action.type) {
-          case 'Home_Update':
+          case 'MoreInformation_Update':
             return {...action.payload.NewSettings};
           default:
             return state;
@@ -59,7 +59,7 @@ export default class Home_codebehind implements IScreenController {
       // make functions available to the front-end
       public mapDispatchToProps = (dispatch: any) => {
         return {
-          AddCount: (state: HomeState) => {Home_codebehind.AddCount(state, dispatch)} 
+          AddCount: (state: MoreInformationState) => {MoreInformation_codebehind.AddCount(state, dispatch)} 
         }
       }
 }

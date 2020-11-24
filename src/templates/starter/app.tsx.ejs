@@ -27,7 +27,7 @@ import {
   View,
   Text,
   StatusBar,
-  AsyncStorage
+  AsyncStorage,
 } from 'react-native';
 import {
   Header,
@@ -38,20 +38,67 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 import {persistStore, persistCombineReducers} from 'redux-persist';
 
-// #### import the application files here 
+// #### import the application files here
 import reducer from './nav-reducer';
-import Splash from './Screens/Splash/Splash'
-import Splash_codebehind from './Screens/Splash/Splash.codebehind'
+import Splash from './Screens/Splash/Splash';
+import Splash_codebehind from './Screens/Splash/Splash.codebehind';
+import MoreInformation from './Screens/MoreInformation/MoreInformation';
+import MoreInformation_codebehind from './Screens/MoreInformation/MoreInformation.codebehind';
+import Home from './Screens/Home/Home';
+import Home_codebehind from './Screens/Home/Home.codebehind';
+//!!nextimport
 
 declare const global: {HermesInternal: null | {}};
 
 // #### add the 'Screen''s here to the NavTree
-const AppNavigator : any = Actions.create(
-<Scene key="root" hideNavBar swipeEnabled={false} gestureEnabled={false}>
+const AppNavigator: any = Actions.create(
+  <Scene key="root" hideNavBar swipeEnabled={false} gestureEnabled={false}>
     <Modal key="Splash" initial={true}>
       <Scene initial={true} component={Splash} hideNavBar />
     </Modal>
-</Scene>
+    <Scene key="MoreInformation" component={MoreInformation} hideNavBar />
+    <Tabs
+      key="TabHome"
+      panHandlers={null}
+      backToInitial={false}
+      onTabOnPress={() => {
+        console.log('Back to initial and also print this');
+      }}
+      animationEnabled={true}
+      duration={3000}
+      swipeEnabled
+      activeBackgroundColor="#F8F8F8"
+      inactiveBackgroundColor="white"
+      showLabel={false}>
+      <Drawer
+        key="Home"
+        contentComponent={() => {
+          return <View></View>
+        }}
+        animationEnabled={true}
+        drawerWidth={250}
+        drawerPosition={'right'}
+        swipeEnabled
+        hideNavBar
+        icon={(focused:any)=> {
+          return (
+            <View>
+              <Text>
+                Home
+              </Text>
+            </View>
+          );
+        }}>
+          <Scene
+          initial={true}
+          component={Home}
+          hideNavBar
+          animationEnabled={true}
+        />
+      </Drawer>
+    </Tabs>
+    {/*!!nextsceneimport*/}
+  </Scene>,
 );
 
 // default nav reducer
@@ -66,7 +113,7 @@ const navReducer = (state = initialState, action: any) => {
 
 // persist config
 // https://blog.reactnativecoach.com/the-definitive-guide-to-redux-persist-84738167975
-const config : any = {
+const config: any = {
   key: 'Auth',
   whitelist: ['Auth'],
   storage: AsyncStorage,
@@ -74,25 +121,35 @@ const config : any = {
 };
 
 // #### Add the codebehind files here
-let splash_controller = new Splash_codebehind();
-const appReducer = persistCombineReducers(config, {
-    nav: navReducer,
-    Splash: splash_controller.reducer,
-  }
-);
-const mapStateToProps = (state:any) => {
-    return {
-      state: state.nav,
-      Splash: splash_controller.reducer,
-    };
-}
+let Splash_controller = new Splash_codebehind();
+let MoreInformation_controller = new MoreInformation_codebehind();
+let Home_controller = new Home_codebehind();
+//!!nextcontroller
 
-const middleware = createReactNavigationReduxMiddleware('root',
-    (state : any) => state.nav,
+const appReducer = persistCombineReducers(config, {
+  nav: navReducer,
+  Splash: Splash_controller.reducer,
+  MoreInformation: MoreInformation_controller.reducer,
+  Home: Home_controller.reducer,
+  //!!nextreducer
+});
+const mapStateToProps = (state: any) => {
+  return {
+    state: state.nav,
+    Splash: Splash_controller.reducer,
+    MoreInformation: MoreInformation_controller.reducer,
+    Home: Home_controller.reducer,
+    //!!nextprop
+  };
+};
+
+const middleware = createReactNavigationReduxMiddleware(
+  'root',
+  (state: any) => state.nav,
 );
 const ReduxNavigator = reduxifyNavigator(AppNavigator, 'root');
 
-const ReduxRouter : any = connect(mapStateToProps)(Router as any);
+const ReduxRouter: any = connect(mapStateToProps)(Router as any);
 
 const store = createStore(
   appReducer,
@@ -100,18 +157,18 @@ const store = createStore(
 );
 
 const persistor = persistStore(store, null, () => {
-    store.getState(); // if you want to get restoredState
+  store.getState(); // if you want to get restoredState
 });
-  
+
 // uncomment to clear the local storage
 persistor.purge();
 
 const Application = () => {
   return (
     <View style={{height: '100%', width: '100%'}}>
-        <Provider store={store}>
-          <ReduxRouter navigator={ReduxNavigator} />
-        </Provider>
+      <Provider store={store}>
+        <ReduxRouter navigator={ReduxNavigator} />
+      </Provider>
     </View>
   );
 };
@@ -120,4 +177,3 @@ const App = Application;
 // eventually add codepush...
 // const App = codePush(Application);
 export default App;
-

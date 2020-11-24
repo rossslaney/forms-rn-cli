@@ -54,7 +54,7 @@ const Splash: React.FC<SplashState> = (
         <View style={{height: actualDimensions.height / 65}} />
         <View>
           <TouchableOpacity
-            onPress={() => { console.log('pressed') }}
+            onPress={() => { Actions.Home()}}
             style={{
               width: actualDimensions.width / 1.1,
               height: actualDimensions.height / 12,
@@ -85,7 +85,7 @@ const Splash: React.FC<SplashState> = (
               alignSelf: 'center',
             }}
             onPress={() => {
-              props.AddCount(props);
+              Actions.MoreInformation()
             }}>
             <CardView
               cardElevation={3}

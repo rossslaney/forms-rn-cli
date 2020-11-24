@@ -11,7 +11,7 @@ export interface SplashState {
 
 export default class Splash_codebehind implements IScreenController {
 
-    // ### put your component default state here 
+    // #### put your component default state here 
     public CurrentState: SplashState = {
         AddCount : Splash_codebehind.AddCount,
         VersionNumber: '0.0.1',
@@ -19,7 +19,7 @@ export default class Splash_codebehind implements IScreenController {
         Count: 0
     }
 
-    // ### connect to the SessionStore here (as little as possible for performance)
+    // #### connect to the SessionStore here (as little as possible for performance)
     public mapStateToProps = (SessionStore: any, ownProps: any) => {
         return {
             Splash: SessionStore.Splash,
@@ -27,7 +27,7 @@ export default class Splash_codebehind implements IScreenController {
         }
     }
 
-    // ### put your codebehind-functions here - static functions implement business logic
+    // #### put your codebehind-functions here - static functions implement business logic
     public static AddCount(state: SplashState, dispatch?: any): void {
       //@ts-ignore
         let NewState = state.Splash;

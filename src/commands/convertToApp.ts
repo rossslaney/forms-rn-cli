@@ -31,6 +31,33 @@ const command: GluegunCommand = {
         props: { name }
       })
     
+
+      await template.generate({
+        template: '/starter/Screens/MoreInformation/MoreInformation.tsx.ejs',
+        target: `Screens/MoreInformation/MoreInformation.tsx`,
+        props: { name }
+      })
+ 
+      await template.generate({
+        template: '/starter/Screens/MoreInformation/MoreInformation.codebehind.ts.ejs',
+        target: `Screens/MoreInformation/MoreInformation.codebehind.ts`,
+        props: { name }
+      })
+
+      await template.generate({
+        template: '/starter/Screens/Home/Home.tsx.ejs',
+        target: `Screens/Home/Home.tsx`,
+        props: { name }
+      })
+ 
+      await template.generate({
+        template: '/starter/Screens/Home/Home.codebehind.ts.ejs',
+        target: `Screens/Home/Home.codebehind.ts`,
+        props: { name }
+      })
+
+
+
     await template.generate({
         template: '/starter/app.tsx.ejs',
         target: `app.tsx`,
