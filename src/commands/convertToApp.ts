@@ -59,7 +59,7 @@ const command: GluegunCommand = {
 
       await template.generate({
         template: '/starter/Containers/Header/Header.tsx.ejs',
-        target: `Screens/Header/Header.tsx`,
+        target: `Containers/Header/Header.tsx`,
         props: { name }
       })
  
@@ -71,13 +71,13 @@ const command: GluegunCommand = {
 
       await template.generate({
         template: '/starter/Services/Auth/Auth.codebehind.ts.ejs',
-        target: `Services/Auth/Auth.tsx`,
+        target: `Services/Auth/Auth.codebehind.ts`,
         props: { name }
       })
 
       await template.generate({
         template: '/starter/Services/Entity/Entity.codebehind.ts.ejs',
-        target: `Services/Entity/Entity.tsx`,
+        target: `Services/Entity/Entity.codebehind.ts`,
         props: { name }
       })
 

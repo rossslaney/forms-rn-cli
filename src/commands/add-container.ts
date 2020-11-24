@@ -14,17 +14,6 @@ const AddContainerImportToApp = async (name: string) => {
   console.log('replace import Container: ', results);
 }
 
-const AddSceneToApp = async (name: string) => {
-  const navReslt = replace.sync({
-    files: 'app.tsx',
-    from: '{/*!!nextsceneimport*/}',
-    to: "<Scene key='" + name + "' component={" + name +"} hideNavBar /> \n\t\t" + 
-    "{/*!!nextsceneimport*/}", 
-    countMatches: true,
-  });
-  console.log('add scene to navtree: ', navReslt);
-}
-
 const AddControllerToApp = async (name: string) => {
   const results = replace.sync({
     files: 'app.tsx',
@@ -78,8 +67,6 @@ module.exports = {
 
     // 1) add the import of the newly generated files
     AddContainerImportToApp(name);
-    // 2) if 'Screen' then add to the NavTree
-    AddSceneToApp(name);
     // 3) add the codebehind controller line and add to the appReducer and mapStateToProps
     AddControllerToApp(name);
     AddReducerToApp(name);
