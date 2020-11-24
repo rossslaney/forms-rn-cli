@@ -11,7 +11,7 @@ const AddContainerImportToApp = async (name: string) => {
     "//!!nextimport", 
     countMatches: true,
   });
-  console.log('replace import screen: ', results);
+  console.log('replace import Container: ', results);
 }
 
 const AddSceneToApp = async (name: string) => {
@@ -65,14 +65,14 @@ module.exports = {
     const name = parameters.first
 
     await template.generate({
-      template: `screen.tsx.ejs`,
-      target: `Screens/${name}/${name}.tsx`,
+      template: `container.tsx.ejs`,
+      target: `Containers/${name}/${name}.tsx`,
       props: { name }
     })
 
     await template.generate({
       template: `codebehind.ts.ejs`,
-      target: `Screens/${name}/${name}.codebehind.ts`,
+      target: `Containers/${name}/${name}.codebehind.ts`,
       props: { name }
     })
 
@@ -84,6 +84,6 @@ module.exports = {
     AddControllerToApp(name);
     AddReducerToApp(name);
     AddPropToApp(name);
-    print.info('Generated screen and codebehind file. ')
+    print.info('Generated Container and codebehind file. ')
   },
 }

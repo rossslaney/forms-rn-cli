@@ -6,11 +6,11 @@ const AddServiceImportToApp = async (name: string) => {
   const results = replace.sync({
     files: 'app.tsx',
     from: '//!!nextimport',
-    to: "import " + name + "_codebehind from './Screens/" + name + "/" + name + ".codebehind';\n" +
+    to: "import " + name + "_codebehind from './Services/" + name + "/" + name + ".codebehind';\n" +
     "//!!nextimport", 
     countMatches: true,
   });
-  console.log('replace import screen: ', results);
+  console.log('replace import Service: ', results);
 }
 
 
@@ -55,7 +55,7 @@ module.exports = {
 
     await template.generate({
       template: `codebehind.ts.ejs`,
-      target: `Screens/${name}/${name}.codebehind.ts`,
+      target: `Services/${name}/${name}.codebehind.ts`,
       props: { name }
     })
 
