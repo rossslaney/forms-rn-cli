@@ -6,7 +6,7 @@ const AddSessionStoreConnectionToCodeBehindFile = async (codebehindPath: string,
   const results = replace.sync({
     files: codebehindPath,
     from: '//!!nextsessionstoreconnection',
-    to: SessionStoreSlice + ": SessionStore." + SessionStoreSlice + ",\n\t\t\t\t\t" +
+    to: SessionStoreSlice + ": SessionStore." + SessionStoreSlice + ",\n\t\t\t\t\t\t" +
     "//!!nextsessionstoreconnection", 
     countMatches: true,
   });
@@ -17,11 +17,11 @@ const add_nextinterfaceconnection = async (codebehindPath: string, SessionStoreS
   const results = replace.sync({
     files: codebehindPath,
     from: '//!!nextinterfaceconnection',
-    to: SessionStoreSlice + "?:" + SessionStoreSlice + "State" + ";\n\t\t\t" +
+    to: SessionStoreSlice + "?:" + SessionStoreSlice + "State" + ";\n\t\t" +
     "//!!nextinterfaceconnection", 
     countMatches: true,
   });
-  console.log('AddConnectionToCodeBehindFile: ', results);
+  console.log('add_nextinterfaceconnection: ', results);
 }
 
 const add_nextfileimport = async (codebehindPath: string, SessionStoreSlice: string, SessionStoreSliceCodeBehindPath: string) => {
@@ -32,7 +32,7 @@ const add_nextfileimport = async (codebehindPath: string, SessionStoreSlice: str
     "//!!nextfileimport", 
     countMatches: true,
   });
-  console.log('AddConnectionToCodeBehindFile: ', results);
+  console.log('add_nextfileimport: ', results);
 }
 
 module.exports = {

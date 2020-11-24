@@ -63,12 +63,17 @@ To use the new function:
 
 > onPress={() => {nameOfFunction(props)}}
 
+example usage:
+
+> forms-rn-cli create-codebehind-function ./Screens/Home/Home.codebehind.ts SubtractCount Home
+
 ## Create a 'CodeBehind Connection'
 
 Connect the codebehind to the State Tree. To ensure performance it is best practice to keep connections to the fewest needed for the component to work.
 
 > forms-rn-cli create-codebehind-connection [NameOfCodeBehindFile][nameofcodebehindfiletoconnectto]  
-> e.g. : forms-rn-cli create-codebehind-connection ./Screens/Home/Home.codebehind.ts Entity ../../services/entity/entity.codebehind
+> e.g. : forms-rn-cli create-codebehind-connection ./Screens/Home/Home.codebehind.ts Entity ../../services/entity/entity.codebehind  
+> Use the new connection (Home.tsx) : console.log('entity test: ', props.Entity);
 
 ## Using the ReduxRouter Navigation
 
