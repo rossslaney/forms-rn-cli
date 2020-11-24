@@ -27,8 +27,6 @@ Add a new 'Screen' and associated codebehind file connected to the SessionStore 
 
 > forms-rn-cli add-screen [NameOfScreen]
 
-Use the Navigation instructions below to place the 'Screen' in your NavTree.
-
 ## Add a 'Container'
 
 Add a new 'Container' and associated codebehind file connected to the SessionStore in App.tsx.
@@ -43,7 +41,9 @@ Add a new 'Service' - these are connected to the Session Store and have function
 
 > forms-rn-cli add-service [NameOfService]
 
-Call the service from codebehind: var newEntityControllerState = await EntityController.Fetch_Entities(a,b,c,dispatch)
+Call the service from codebehind:
+
+> var newEntityControllerState = await EntityController.Fetch_Entities(a,b,c,dispatch)
 
 ## Create a 'CodeBehind Function'
 
@@ -63,9 +63,12 @@ example usage:
 
 Connect the codebehind to the State Tree. To ensure performance it is best practice to keep connections to the fewest needed for the component to work.
 
-> forms-rn-cli create-codebehind-connection [NameOfCodeBehindFile][nameofcodebehindfiletoconnectto]  
-> e.g. : forms-rn-cli create-codebehind-connection ./Screens/Home/Home.codebehind.ts Entity ../../services/entity/entity.codebehind  
-> Use the new connection (Home.tsx) : console.log('entity test: ', props.Entity);
+> forms-rn-cli create-codebehind-connection [NameOfCodeBehindFile][nameofcodebehindfiletoconnectto]
+>
+> e.g. : forms-rn-cli create-codebehind-connection ./Screens/Home/Home.codebehind.ts Entity ../../services/entity/entity.codebehind
+>
+> Use the new connection (Home.tsx) :
+> console.log('entity test: ', props.Entity);
 
 ## Using the ReduxRouter Navigation
 
