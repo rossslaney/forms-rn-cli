@@ -1,36 +1,35 @@
 import IScreenController from '../../types';
 import {ActionConst, Actions} from 'react-native-router-flux';
+//!!nextfileimport
 
 export interface EntityState {
-    // # put your component's state here
-    AddCount(props: EntityState):void;
+    // # give your component properties here
     VersionNumber: string;
     ScreenName: string;
     Count: number;
+
+    // # code-gen below here
+    AddCount(props: EntityState):void;
+    //!!nextinterfacefunction
+    Entity?:EntityState;
+    //!!nextinterfaceconnection
 }
 
 export default class Entity_codebehind implements IScreenController {
 
-    // ### put your component default state here 
+    // # assign a default state 
     public CurrentState: EntityState = {
-        AddCount : Entity_codebehind.AddCount,
         VersionNumber: '0.0.1',
         ScreenName: 'Entity',
-        Count: 0
-    }
-
-    // ### connect to the SessionStore here (as little as possible for performance)
-    public mapStateToProps = (SessionStore: any, ownProps: any) => {
-        return {
-            Entity: SessionStore.Entity,
-            root: SessionStore.root,
-        }
+        Count: 0,
+        AddCount : Entity_codebehind.AddCount,
+        //!!nextstatefunction
     }
 
     // ### put your codebehind-functions here - static functions implement business logic
     public static AddCount(state: EntityState, dispatch?: any): void {
-      //@ts-ignore
-        let NewState = state.Entity;
+      let NewState = state.Entity;
+      if(NewState != undefined){
         NewState.Count += 1;
         // dispatch to parent store
           dispatch({
@@ -39,8 +38,12 @@ export default class Entity_codebehind implements IScreenController {
                 NewSettings: NewState,
               },
         });
+      }
     }
+    //!!nextfunction
 
+
+    /*******************************  %100 code-gen below here   *******************************/
     // constructor
     public Entity_codebehind(state: EntityState){
         this.CurrentState = state;
@@ -59,7 +62,16 @@ export default class Entity_codebehind implements IScreenController {
       // make functions available to the front-end
       public mapDispatchToProps = (dispatch: any) => {
         return {
-          AddCount: (state: EntityState) => {Entity_codebehind.AddCount(state, dispatch)} 
+          AddCount: (state: EntityState) => {Entity_codebehind.AddCount(state, dispatch)},
+          //!!nextdispatchprop 
         }
       }
+
+    // ### connect to the SessionStore here (as little as possible for performance)
+    public mapStateToProps = (SessionStore: any, ownProps: any) => {
+        return {
+          Entity: SessionStore.Entity,
+            //!!nextsessionstoreconnection
+        }
+    }
 }
