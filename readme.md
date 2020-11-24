@@ -37,14 +37,6 @@ Add a new 'Container' and associated codebehind file connected to the SessionSto
 
 Place the 'Container' anywhere in your application markup <[NameOfContainer] />
 
-## Add a 'DumbComponent'
-
-Add a new 'DumbComponent' - these are not connected to the SessionStore
-
-> forms-rn-cli add-component [NameOfDumbComponent]
-
-Place the 'DumbComponent' anywhere in your application markup <[NameOfDumbComponent] />
-
 ## Add a 'Service'
 
 Add a new 'Service' - these are connected to the Session Store and have functions that can be called from other codebehind files but do not have a visual component.
