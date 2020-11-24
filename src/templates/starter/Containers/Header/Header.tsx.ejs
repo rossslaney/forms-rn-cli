@@ -1,0 +1,45 @@
+import React from 'react';
+import {
+  Button,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  TouchableOpacity,
+  ImageBackground,
+  ScrollView,
+} from 'react-native';
+import {Provider, connect} from 'react-redux';
+import {Actions} from 'react-native-router-flux';
+
+//@ts-ignore
+import CardView from 'react-native-cardview';
+import { HeaderState } from './Header.codebehind';
+import Header_codebehind from './Header.codebehind';
+import actualDimensions from '../../util/dimensions';
+
+const Header: React.FC<HeaderState> = (
+    props: HeaderState,
+  ) => {
+    return (
+      <View style={{height: '15%', width: '100%', borderWidth: 1, backgroundColor: 'yellow'}}>
+        <Text
+          style={{
+            position: 'absolute',
+            bottom: 10,
+            color: 'grey',
+            alignSelf: 'center',
+          }}>
+          Header Container
+        </Text>
+      </View>
+    );
+  };
+  
+  let codebehind = new Header_codebehind();
+  export default connect(
+    codebehind.mapStateToProps,
+    codebehind.mapDispatchToProps,
+  )(Header);
+
+

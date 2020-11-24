@@ -29,13 +29,6 @@ import {
   StatusBar,
   AsyncStorage,
 } from 'react-native';
-import {
-  Header,
-  LearnMoreLinks,
-  Colors,
-  DebugInstructions,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
 import {persistStore, persistCombineReducers} from 'redux-persist';
 
 // #### import the application files here
@@ -46,6 +39,12 @@ import MoreInformation from './Screens/MoreInformation/MoreInformation';
 import MoreInformation_codebehind from './Screens/MoreInformation/MoreInformation.codebehind';
 import Home from './Screens/Home/Home';
 import Home_codebehind from './Screens/Home/Home.codebehind';
+import ScreenHeader from './Containers/ScreenHeader/ScreenHeader';
+import ScreenHeader_codebehind from './Containers/ScreenHeader/ScreenHeader.codebehind';
+import Header from './Containers/Header/Header';
+import Header_codebehind from './Containers/Header/Header.codebehind';
+import Entity_codebehind from './Services/Entity/Entity.codebehind';
+import Auth_codebehind from './Services/Auth/Auth.codebehind';
 //!!nextimport
 
 declare const global: {HermesInternal: null | {}};
@@ -97,7 +96,9 @@ const AppNavigator: any = Actions.create(
         />
       </Drawer>
     </Tabs>
-    {/*!!nextsceneimport*/}
+    <Scene key='ScreenHeader' component={ScreenHeader} hideNavBar /> 
+		<Scene key='Header' component={Header} hideNavBar /> 
+		{/*!!nextsceneimport*/}
   </Scene>,
 );
 
@@ -124,6 +125,10 @@ const config: any = {
 let Splash_controller = new Splash_codebehind();
 let MoreInformation_controller = new MoreInformation_codebehind();
 let Home_controller = new Home_codebehind();
+let ScreenHeader_controller = new ScreenHeader_codebehind();
+let Header_controller = new Header_codebehind();
+let Entity_controller = new Entity_codebehind();
+let Auth_controller = new Auth_codebehind();
 //!!nextcontroller
 
 const appReducer = persistCombineReducers(config, {
@@ -131,7 +136,11 @@ const appReducer = persistCombineReducers(config, {
   Splash: Splash_controller.reducer,
   MoreInformation: MoreInformation_controller.reducer,
   Home: Home_controller.reducer,
-  //!!nextreducer
+  ScreenHeader: ScreenHeader_controller.reducer,
+		Header: Header_controller.reducer,
+		Entity: Entity_controller.reducer,
+		Auth: Auth_controller.reducer,
+		//!!nextreducer
 });
 const mapStateToProps = (state: any) => {
   return {
@@ -139,7 +148,11 @@ const mapStateToProps = (state: any) => {
     Splash: Splash_controller.reducer,
     MoreInformation: MoreInformation_controller.reducer,
     Home: Home_controller.reducer,
-    //!!nextprop
+    ScreenHeader: ScreenHeader_controller.reducer,
+		Header: Header_controller.reducer,
+		Entity: Entity_controller.reducer,
+		Auth: Auth_controller.reducer,
+		//!!nextprop
   };
 };
 

@@ -1,40 +1,40 @@
 import IScreenController from '../../types';
 import {ActionConst, Actions} from 'react-native-router-flux';
 
-export interface HeaderState {
+export interface EntityState {
     // # put your component's state here
-    AddCount(props: HeaderState):void;
+    AddCount(props: EntityState):void;
     VersionNumber: string;
     ScreenName: string;
     Count: number;
 }
 
-export default class Header_codebehind implements IScreenController {
+export default class Entity_codebehind implements IScreenController {
 
     // ### put your component default state here 
-    public CurrentState: HeaderState = {
-        AddCount : Header_codebehind.AddCount,
+    public CurrentState: EntityState = {
+        AddCount : Entity_codebehind.AddCount,
         VersionNumber: '0.0.1',
-        ScreenName: 'Header',
+        ScreenName: 'Entity',
         Count: 0
     }
 
     // ### connect to the SessionStore here (as little as possible for performance)
     public mapStateToProps = (SessionStore: any, ownProps: any) => {
         return {
-            Header: SessionStore.Header,
+            Entity: SessionStore.Entity,
             root: SessionStore.root,
         }
     }
 
     // ### put your codebehind-functions here - static functions implement business logic
-    public static AddCount(state: HeaderState, dispatch?: any): void {
+    public static AddCount(state: EntityState, dispatch?: any): void {
       //@ts-ignore
-        let NewState = state.Header;
+        let NewState = state.Entity;
         NewState.Count += 1;
         // dispatch to parent store
           dispatch({
-              type: 'Header_Update',
+              type: 'Entity_Update',
               payload: {
                 NewSettings: NewState,
               },
@@ -42,14 +42,14 @@ export default class Header_codebehind implements IScreenController {
     }
 
     // constructor
-    public Header_codebehind(state: HeaderState){
+    public Entity_codebehind(state: EntityState){
         this.CurrentState = state;
     }
 
-    // listen to Update_Header dispatches
+    // listen to Update_Entity dispatches
     public reducer = (state = this.CurrentState, action: any = {type: {}, payload: {}}) => {
         switch (action.type) {
-          case 'Header_Update':
+          case 'Entity_Update':
             return {...action.payload.NewSettings};
           default:
             return state;
@@ -59,7 +59,7 @@ export default class Header_codebehind implements IScreenController {
       // make functions available to the front-end
       public mapDispatchToProps = (dispatch: any) => {
         return {
-          AddCount: (state: HeaderState) => {Header_codebehind.AddCount(state, dispatch)} 
+          AddCount: (state: EntityState) => {Entity_codebehind.AddCount(state, dispatch)} 
         }
       }
 }

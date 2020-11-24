@@ -17,12 +17,14 @@ import CardView from 'react-native-cardview';
 import { HomeState } from './Home.codebehind';
 import Home_codebehind from './Home.codebehind';
 import actualDimensions from '../../util/dimensions';
+import Header from '../../Containers/Header/Header';
 
 const Home: React.FC<HomeState> = (
     props: HomeState,
   ) => {
     return (
       <View style={{height: '100%', width: '100%'}}>
+        <Header /> 
         <Text style={{position: 'absolute', top: 35, right: 25}}>
           {props.VersionNumber}
         </Text>
