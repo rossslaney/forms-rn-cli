@@ -114,6 +114,14 @@ const command: GluegunCommand = {
       })
 
 
+
+    await template.generate({
+      template: '/starter/util/b2cClient.ts.ejs',
+      // target: `${name}/nav-reducer.ts`,
+      target: `util/b2cClient.ts`,
+      props: { name }
+    })
+
     await template.generate({
       template: '/starter/.gitignore.ejs',
       // target: `${name}/nav-reducer.ts`,

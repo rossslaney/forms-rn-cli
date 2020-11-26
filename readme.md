@@ -26,7 +26,9 @@ The starter app will come with the following pre-configured:
 > Create an Azure AD B2C application for iOS in the Azure Portal and register a redirect URI for your application. It should be in the following format: msauth.[BUNDLE_ID]://auth  
 > copy and adjust the app name from 'example' to your app name in AppDelegate.m file from example: https://raw.githubusercontent.com/stashenergy/react-native-msal/master/example/ios/example/AppDelegate.m  
 > copy and adjust the app name from 'example' to your app name info.plist from example: https://raw.githubusercontent.com/stashenergy/react-native-msal/master/example/ios/example/Info.plist  
-> update the b2cConfig and b2cScopes in msalConfig.ts
+> update the b2cConfig and b2cScopes in msalConfig.ts  
+> Open the ios/[projectname]/xcworkspace file, go to Signing & Capabilities, and add a Keychain Sharing capability. Add an entry to the Keychain Groups:  
+> com.microsoft.adalcache
 
 ### Optionally Remove Auth Features:
 
