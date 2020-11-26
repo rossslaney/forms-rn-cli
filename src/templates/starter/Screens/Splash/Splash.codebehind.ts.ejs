@@ -1,5 +1,7 @@
 import { IScreenController } from '../../types';
 import {ActionConst, Actions} from 'react-native-router-flux';
+import Auth_codebehind from '../../Services/Auth/Auth.codebehind';
+import { AuthState } from '../../services/Auth/Auth.codebehind'; ;
 //!!nextfileimport
 
 export interface SplashState {
@@ -10,9 +12,11 @@ export interface SplashState {
 
     // # code-gen below here
     AddCount(props: SplashState):void;
-    //!!nextinterfacefunction
+    HandleSignInPress(props: SplashState):void;
+		//!!nextinterfacefunction
     Splash?:SplashState;
-    //!!nextinterfaceconnection
+    Auth?:AuthState;
+		//!!nextinterfaceconnection
 }
 
 export default class Splash_codebehind implements IScreenController {
@@ -23,7 +27,8 @@ export default class Splash_codebehind implements IScreenController {
         ScreenName: 'Splash',
         Count: 0,
         AddCount : Splash_codebehind.AddCount,
-        //!!nextstatefunction
+        HandleSignInPress : Splash_codebehind.HandleSignInPress,
+				//!!nextstatefunction
     }
 
     // ### put your codebehind-functions here - static functions implement business logic
@@ -40,7 +45,29 @@ export default class Splash_codebehind implements IScreenController {
         });
       }
     }
-    //!!nextfunction
+
+    public static async HandleSignInPress(state: SplashState, dispatch?: any): Promise<void> {
+			let NewState = state.Splash;
+				if(NewState != undefined){
+          // perform updates to the NewState object here (e.g. NewState.Count += 1; )
+          try{
+            await Auth_codebehind.HandleSignInPress(state.Auth as AuthState, dispatch);
+            dispatch({type: 'Splash_Update',payload: {NewSettings: NewState}})
+            Actions.reset('TabHome');
+          }catch(e){
+            // first try to acquire token silently in case the user was already logged in 
+            try{
+              await Auth_codebehind.AcquireTokenSilent(state.Auth as AuthState, dispatch);
+              dispatch({type: 'Splash_Update',payload: {NewSettings: NewState}})
+              Actions.Home();
+            }catch(silentSignInE){
+              // dispatch an action to show an error message on the splash screen
+              console.error(e)
+            }
+          }
+				}
+			}
+			//!!nextfunction
 
 
     /*******************************  %100 code-gen below here   *******************************/
@@ -63,7 +90,8 @@ export default class Splash_codebehind implements IScreenController {
       public mapDispatchToProps = (dispatch: any) => {
         return {
           AddCount: (state: SplashState) => {Splash_codebehind.AddCount(state, dispatch)},
-          //!!nextdispatchprop 
+          HandleSignInPress: async (state: SplashState) => {await Splash_codebehind.HandleSignInPress(state, dispatch)},
+					//!!nextdispatchprop 
         }
       }
 
@@ -71,7 +99,8 @@ export default class Splash_codebehind implements IScreenController {
       public mapStateToProps = (SessionStore: any, ownProps: any) => {
           return {
             Splash: SessionStore.Splash,
-              //!!nextsessionstoreconnection
+              Auth: SessionStore.Auth,
+						//!!nextsessionstoreconnection
           }
       }
 }

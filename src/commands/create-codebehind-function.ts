@@ -19,7 +19,7 @@ const add_nextfunction = async (codebehindPath: string, FunctionName: string, co
   const results = replace.sync({
     files: codebehindPath,
     from: '//!!nextfunction',
-    to: "public static " + FunctionName + "(state: " + codebehindName + "State, dispatch?: any): void {"+ ";\n\t\t\t" +
+    to: "public static " + FunctionName + "(state: " + codebehindName + "State, dispatch?: any): void {"+ "\n\t\t\t" +
           "let NewState = state." + codebehindName + ";"+ "\n\t\t\t\t" +
           "if(NewState != undefined){"+ "\n\t\t\t\t\t" +
           "// perform updates to the NewState object here (e.g. NewState.Count += 1; )"+ "\n\t\t\t\t\t" +
@@ -70,6 +70,6 @@ module.exports = {
     // add dispatch
     add_nextdispatchprop(parameters.first, parameters.second, parameters.third);
     add_nextstatefunction(parameters.first, parameters.second, parameters.third);
-    info(`Added sessions store connection to slice`)
+    info(`Add function complete`)
   },
 }

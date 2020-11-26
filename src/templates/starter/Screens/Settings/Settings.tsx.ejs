@@ -14,11 +14,11 @@ import {Actions} from 'react-native-router-flux';
 
 //@ts-ignore
 import CardView from 'react-native-cardview';
-import {SplashState} from './Splash.codebehind';
-import Splash_codebehind from './Splash.codebehind';
+import {SettingsState} from './Settings.codebehind';
+import Settings_codebehind from './Settings.codebehind';
 import actualDimensions from '../../util/dimensions';
 
-const Splash: React.FC<SplashState> = (props: SplashState) => {
+const Settings: React.FC<SettingsState> = (props: SettingsState) => {
   return (
     <View style={{height: '100%', width: '100%'}}>
       <Text style={{position: 'absolute', top: 35, right: 25}}>
@@ -35,7 +35,7 @@ const Splash: React.FC<SplashState> = (props: SplashState) => {
         <Text
           style={{
             paddingBottom: actualDimensions.height / 12,
-            fontSize: actualDimensions.height / 40,
+            fontSize: actualDimensions.height / 60,
             fontWeight: 'bold',
             fontFamily: 'Gill Sans',
             color: '#ff6a00',
@@ -43,7 +43,7 @@ const Splash: React.FC<SplashState> = (props: SplashState) => {
             textShadowOffset: {width: -1, height: 1},
             textShadowRadius: 3,
           }}>
-          FormsRN CLI
+          Screen : Settings
         </Text>
         <View></View>
       </View>
@@ -51,14 +51,14 @@ const Splash: React.FC<SplashState> = (props: SplashState) => {
       <View>
         <TouchableOpacity
           onPress={async () => {
-            await props.HandleSignInPress(props);
+            await props.HandlePressSignOut(props);
           }}
           style={{
             width: actualDimensions.width / 1.1,
-            height: actualDimensions.height / 12,
+            height: actualDimensions.height / 20,
             shadowOpacity: 0.3,
             alignSelf: 'center',
-            backgroundColor: '#ff6a00',
+            backgroundColor: '#ff6961',
             justifyContent: 'center',
             alignItems: 'center',
             margin: actualDimensions.width / 25,
@@ -67,54 +67,12 @@ const Splash: React.FC<SplashState> = (props: SplashState) => {
           <Text
             style={{
               fontFamily: 'Gill Sans',
-              fontSize: 22,
+              fontSize: 15,
               color: 'white',
               fontWeight: 'bold',
             }}>
-            Sign In / Sign Up
+            Sign Out User
           </Text>
-        </TouchableOpacity>
-        <View style={{height: actualDimensions.height / 30}} />
-
-        <TouchableOpacity
-          style={{
-            width: actualDimensions.width / 1.25,
-            height: actualDimensions.height / 25,
-            alignSelf: 'center',
-          }}
-          onPress={() => {
-            Actions.MoreInformation();
-          }}>
-          <CardView
-            cardElevation={3}
-            cardMaxElevation={3}
-            cornerRadius={5}
-            style={{
-              alignItems: 'center',
-              justifyContent: 'center',
-              alignSelf: 'center',
-              height: '100%',
-              width: '100%',
-              backgroundColor: '#ffffef',
-              margin: 5,
-              flexDirection: 'row',
-            }}>
-            <View style={{flex: 1}} />
-
-            <Text
-              style={{
-                flex: 1.6,
-                alignItems: 'center',
-                fontFamily: 'Gill Sans',
-              }}>
-              More Information
-            </Text>
-
-            <View
-              style={{
-                margin: '0.5%',
-              }}></View>
-          </CardView>
         </TouchableOpacity>
         <View style={{height: actualDimensions.height / 30}} />
       </View>
@@ -125,14 +83,14 @@ const Splash: React.FC<SplashState> = (props: SplashState) => {
           color: 'grey',
           alignSelf: 'center',
         }}>
-        Developed with Forms RN Scaffolding CLI
+        Settings Screen initiated with Forms RN Scaffolding CLI
       </Text>
     </View>
   );
 };
 
-let codebehind = new Splash_codebehind();
+let codebehind = new Settings_codebehind();
 export default connect(
   codebehind.mapStateToProps,
   codebehind.mapDispatchToProps,
-)(Splash);
+)(Settings);

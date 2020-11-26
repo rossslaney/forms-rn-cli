@@ -28,7 +28,7 @@ const add_nextfileimport = async (codebehindPath: string, SessionStoreSlice: str
   const results = replace.sync({
     files: codebehindPath,
     from: '//!!nextfileimport',
-    to: "import { " + SessionStoreSlice +"State } from '" + SessionStoreSliceCodeBehindPath + "'; " + ";\n" +
+    to: "import { " + SessionStoreSlice +"State } from '" + SessionStoreSliceCodeBehindPath + "'; " + "\n" +
     "//!!nextfileimport", 
     countMatches: true,
   });

@@ -21,6 +21,19 @@ The starter app will come with the following pre-configured:
 > ScreenHeaderContainer -> 'Container' demo used to show a dynamic header on each 'Screen'  
 > DataCard -> 'DumbComponent' demo used to show a simple visual component
 
+## Set up Azure B2C Auth:
+
+> Create an Azure AD B2C application for iOS in the Azure Portal and register a redirect URI for your application. It should be in the following format: msauth.[BUNDLE_ID]://auth  
+> copy and adjust the app name from 'example' to your app name in AppDelegate.m file from example: https://raw.githubusercontent.com/stashenergy/react-native-msal/master/example/ios/example/AppDelegate.m  
+> copy and adjust the app name from 'example' to your app name info.plist from example: https://raw.githubusercontent.com/stashenergy/react-native-msal/master/example/ios/example/Info.plist  
+> update the b2cConfig and b2cScopes in msalConfig.ts
+
+### Optionally Remove Auth Features:
+
+Simply remove the Auth functions from the splash and entity codebehind files ->
+
+> e.g. delete this from Splash.codebehind -> await Auth_codebehind.HandleSignInPress(state.Auth as AuthState, dispatch);
+
 ## Add a 'Screen'
 
 Add a new 'Screen' and associated codebehind file connected to the SessionStore in App.tsx.
@@ -49,7 +62,7 @@ Call the service from codebehind:
 
 Make a function available from the codebehind to the front-end:
 
-> forms-rn-cli create-codebehind-function [NameOfCodeBehindFile][nameoffunction]
+> forms-rn-cli create-codebehind-function [PathToCodeBehindFile][nameoffunction] [NameOfCodeBehind]
 
 To use the new function:
 
@@ -63,7 +76,7 @@ example usage:
 
 Connect the codebehind to the State Tree. To ensure performance it is best practice to keep connections to the fewest needed for the component to work.
 
-> forms-rn-cli create-codebehind-connection [NameOfCodeBehindFile][nameofcodebehindfiletoconnectto]
+> forms-rn-cli create-codebehind-connection [PathCodeBehindFile][nameofnewconnectioncodebehind] [PathToNewConnectionCodeBehind]
 >
 > e.g. : forms-rn-cli create-codebehind-connection ./Screens/Home/Home.codebehind.ts Entity ../../services/entity/entity.codebehind
 >

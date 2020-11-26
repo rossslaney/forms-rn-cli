@@ -1,0 +1,17 @@
+import { B2CConfiguration } from "./util/b2cClient";
+
+export const b2cConfig: B2CConfiguration = {
+    auth: {
+      clientId: '',
+      authorityBase: '',
+      policies: {
+        signInSignUp: '',
+        passwordReset: '',
+      },
+    },
+    // web only:
+    cache: { cacheLocation: 'localStorage' },
+  };
+  
+  export const b2cScopes = [''];
+  

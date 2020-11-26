@@ -43,6 +43,8 @@ import Header from './Containers/Header/Header';
 import Header_codebehind from './Containers/Header/Header.codebehind';
 import Entity_codebehind from './Services/Entity/Entity.codebehind';
 import Auth_codebehind from './Services/Auth/Auth.codebehind';
+import Settings from './Screens/Settings/Settings';
+import Settings_codebehind from './Screens/Settings/Settings.codebehind';
 //!!nextimport
 
 declare const global: {HermesInternal: null | {}};
@@ -50,8 +52,18 @@ declare const global: {HermesInternal: null | {}};
 // #### add the 'Screen''s here to the NavTree
 const AppNavigator: any = Actions.create(
   <Scene key="root" hideNavBar swipeEnabled={false} gestureEnabled={false}>
-    <Modal key="Splash" initial={true}>
-      <Scene initial={true} component={Splash} hideNavBar />
+    <Modal
+      key="Splash"
+      initial={true}
+      swipeEnabled={false}
+      gestureEnabled={false}>
+      <Scene
+        initial={true}
+        component={Splash}
+        swipeEnabled={false}
+        gestureEnabled={false}
+        hideNavBar
+      />
     </Modal>
     <Scene key="MoreInformation" component={MoreInformation} hideNavBar />
     <Tabs
@@ -70,31 +82,53 @@ const AppNavigator: any = Actions.create(
       <Drawer
         key="Home"
         contentComponent={() => {
-          return <View></View>
+          return <View></View>;
         }}
         animationEnabled={true}
         drawerWidth={250}
         drawerPosition={'right'}
         swipeEnabled
         hideNavBar
-        icon={(focused:any)=> {
+        icon={(focused: any) => {
           return (
             <View>
-              <Text>
-                Home
-              </Text>
+              <Text>Home</Text>
             </View>
           );
         }}>
-          <Scene
+        <Scene
           initial={true}
           component={Home}
           hideNavBar
           animationEnabled={true}
         />
       </Drawer>
+      <Drawer
+        key="Settings"
+        contentComponent={() => {
+          return <View></View>;
+        }}
+        animationEnabled={true}
+        drawerWidth={250}
+        drawerPosition={'right'}
+        swipeEnabled
+        hideNavBar
+        icon={(focused: any) => {
+          return (
+            <View>
+              <Text>Settings</Text>
+            </View>
+          );
+        }}>
+        <Scene
+          initial={true}
+          component={Settings}
+          hideNavBar
+          animationEnabled={true}
+        />
+      </Drawer>
     </Tabs>
-		{/*!!nextsceneimport*/}
+    {/*!!nextsceneimport*/}
   </Scene>,
 );
 
@@ -124,6 +158,7 @@ let Home_controller = new Home_codebehind();
 let Header_controller = new Header_codebehind();
 let Entity_controller = new Entity_codebehind();
 let Auth_controller = new Auth_codebehind();
+let Settings_controller = new Settings_codebehind();
 //!!nextcontroller
 
 const appReducer = persistCombineReducers(config, {
@@ -131,10 +166,11 @@ const appReducer = persistCombineReducers(config, {
   Splash: Splash_controller.reducer,
   MoreInformation: MoreInformation_controller.reducer,
   Home: Home_controller.reducer,
-		Header: Header_controller.reducer,
-		Entity: Entity_controller.reducer,
-		Auth: Auth_controller.reducer,
-		//!!nextreducer
+  Header: Header_controller.reducer,
+  Entity: Entity_controller.reducer,
+  Auth: Auth_controller.reducer,
+  Settings: Settings_controller.reducer,
+  //!!nextreducer
 });
 const mapStateToProps = (state: any) => {
   return {
@@ -142,10 +178,11 @@ const mapStateToProps = (state: any) => {
     Splash: Splash_controller.reducer,
     MoreInformation: MoreInformation_controller.reducer,
     Home: Home_controller.reducer,
-		Header: Header_controller.reducer,
-		Entity: Entity_controller.reducer,
-		Auth: Auth_controller.reducer,
-		//!!nextprop
+    Header: Header_controller.reducer,
+    Entity: Entity_controller.reducer,
+    Auth: Auth_controller.reducer,
+    Settings: Settings_controller.reducer,
+    //!!nextprop
   };
 };
 

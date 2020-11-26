@@ -56,6 +56,18 @@ const command: GluegunCommand = {
         props: { name }
       })
 
+      await template.generate({
+        template: '/starter/Screens/Settings/Settings.tsx.ejs',
+        target: `Screens/Settings/Settings.tsx`,
+        props: { name }
+      })
+ 
+      await template.generate({
+        template: '/starter/Screens/Settings/Settings.codebehind.ts.ejs',
+        target: `Screens/Settings/Settings.codebehind.ts`,
+        props: { name }
+      })
+
 
       await template.generate({
         template: '/starter/Containers/Header/Header.tsx.ejs',
@@ -82,8 +94,8 @@ const command: GluegunCommand = {
       })
 
     await template.generate({
-        template: '/starter/app.tsx.ejs',
-        target: `app.tsx`,
+        template: '/starter/msalConfig.ts.ejs',
+        target: `msalConfig.ts`,
         props: { name }
       })
 
@@ -106,13 +118,6 @@ const command: GluegunCommand = {
       template: '/starter/.gitignore.ejs',
       // target: `${name}/nav-reducer.ts`,
       target: `.gitignore`,
-      props: { name }
-    })
-
-    await template.generate({
-      template: '/starter/appsettings.ts.ejs',
-      // target: `${name}/nav-reducer.ts`,
-      target: `appsettings.ts`,
       props: { name }
     })
 

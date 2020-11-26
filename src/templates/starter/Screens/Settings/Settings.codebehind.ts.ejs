@@ -1,0 +1,92 @@
+import { IScreenController } from '../../types';
+import {ActionConst, Actions} from 'react-native-router-flux';
+import Auth_codebehind from '../../Services/Auth/Auth.codebehind';
+import { AuthState } from '../../services/Auth/Auth.codebehind'; 
+//!!nextfileimport
+
+export interface SettingsState {
+    // # give your component properties here
+    VersionNumber: string;
+    ScreenName: string;
+    Count: number;
+
+    // # code-gen below here
+    AddCount(props: SettingsState):void;
+    HandlePressSignOut(props: SettingsState):void;
+		//!!nextinterfacefunction
+    Settings?:SettingsState;
+    Auth?:AuthState;
+		//!!nextinterfaceconnection
+}
+
+export default class Settings_codebehind implements IScreenController {
+
+    // # assign a default state 
+    public CurrentState: SettingsState = {
+        VersionNumber: '0.0.1',
+        ScreenName: 'Settings',
+        Count: 0,
+        AddCount : Settings_codebehind.AddCount,
+        HandlePressSignOut : Settings_codebehind.HandlePressSignOut,
+				//!!nextstatefunction
+    }
+
+    // ### put your codebehind-functions here - static functions implement business logic
+    public static AddCount(state: SettingsState, dispatch?: any): void {
+      let NewState = state.Settings;
+      if(NewState != undefined){
+        NewState.Count += 1;
+        // dispatch to parent store
+          dispatch({
+              type: 'Settings_Update',
+              payload: {
+                NewSettings: NewState,
+              },
+        });
+      }
+    }
+    public static async HandlePressSignOut(state: SettingsState, dispatch?: any): Promise<void> {
+          try{
+            await Auth_codebehind.HandleSignOutPress(state.Auth as AuthState, dispatch);
+            Actions.reset('Splash');
+          }catch(e){
+              console.error(e)
+          }
+			}
+			//!!nextfunction
+
+
+    /*******************************  %100 code-gen below here   *******************************/
+    // constructor
+    public Settings_codebehind(state: SettingsState){
+        this.CurrentState = state;
+    }
+
+    // listen to Update_Settings dispatches
+    public reducer = (state = this.CurrentState, action: any = {type: {}, payload: {}}) => {
+        switch (action.type) {
+          case 'Settings_Update':
+            return {...action.payload.NewSettings};
+          default:
+            return state;
+        }
+      };
+
+      // make functions available to the front-end
+      public mapDispatchToProps = (dispatch: any) => {
+        return {
+          AddCount: (state: SettingsState) => {Settings_codebehind.AddCount(state, dispatch)},
+          HandlePressSignOut: async (state: SettingsState) => {await Settings_codebehind.HandlePressSignOut(state, dispatch)},
+					//!!nextdispatchprop 
+        }
+      }
+
+      // ### connect to the SessionStore here (as little as possible for performance)
+      public mapStateToProps = (SessionStore: any, ownProps: any) => {
+          return {
+            SettingsS: SessionStore.SettingsS,
+              Auth: SessionStore.Auth,
+						//!!nextsessionstoreconnection
+          }
+      }
+}
