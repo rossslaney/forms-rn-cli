@@ -1,0 +1,38 @@
+import { HomeState } from "../Screens/Home/Home.codebehind"
+import { MoreInformationState } from "../Screens/MoreInformation/MoreInformation.codebehind"
+import { SettingsState } from "../Screens/Settings/Settings.codebehind"
+import { SplashState } from "../Screens/Splash/Splash.codebehind"
+import { AuthState } from "../Services/Auth/Auth.codebehind"
+import { EntityState } from "../Services/Entity/Entity.codebehind"
+import { HeaderState } from "../Containers/Header/Header.codebehind"
+//!!nextstateimport
+
+
+export const Home_Update = 'Home_Update'
+export const MoreInformation_Update = 'MoreInformation_Update'
+export const Settings_Update = 'Settings_Update'
+export const Splash_Update = 'Splash_Update'
+export const Auth_Update = 'Auth_Update'
+export const Entity_Update = 'Entity_Update'
+export const Header_Update = 'Header_Update'
+//!!nextdefinition
+
+
+interface Home_Update_Action { type: typeof Home_Update, payload: HomeState}
+interface MoreInformation_Update_Action { type: typeof MoreInformation_Update, payload: MoreInformationState}
+interface Settings_Update_Action { type: typeof Settings_Update, payload: SettingsState}
+interface Splash_Update_Action { type: typeof Splash_Update, payload: SplashState}
+interface Auth_Update_Action { type: typeof Auth_Update, payload: AuthState}
+interface Entity_Update_Action { type: typeof Entity_Update, payload: EntityState}
+interface Header_Update_Action { type: typeof Header_Update, payload: HeaderState}
+//!!nextactiontype
+
+
+export type ActionTypes = Home_Update_Action 
+| MoreInformation_Update_Action
+| Settings_Update_Action
+| Splash_Update_Action
+| Auth_Update_Action
+| Entity_Update_Action
+| Header_Update_Action
+//!!nextexporttype

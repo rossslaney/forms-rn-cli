@@ -1,46 +1,52 @@
 import { IScreenController } from '../../types';
 import {ActionConst, Actions} from 'react-native-router-flux';
+//!!nextfileimport
 
 export interface HeaderState {
-    // # put your component's state here
-    AddCount(props: HeaderState):void;
+    // # give your component properties here
     VersionNumber: string;
     ScreenName: string;
     Count: number;
+
+    // # code-gen below here
+    AddCount(props: HeaderState):void;
+    //!!nextinterfacefunction
+    Header?:HeaderState;
+    //!!nextinterfaceconnection
 }
 
 export default class Header_codebehind implements IScreenController {
 
-    // ### put your component default state here 
+    // # assign a default state 
     public CurrentState: HeaderState = {
-        AddCount : Header_codebehind.AddCount,
         VersionNumber: '0.0.1',
         ScreenName: 'Header',
-        Count: 0
-    }
-
-    // ### connect to the SessionStore here (as little as possible for performance)
-    public mapStateToProps = (SessionStore: any, ownProps: any) => {
-        return {
-            Header: SessionStore.Header,
-            root: SessionStore.root,
-        }
+        Count: 0,
+        AddCount : Header_codebehind.AddCount,
+        //!!nextstatefunction
     }
 
     // ### put your codebehind-functions here - static functions implement business logic
-    public static AddCount(state: HeaderState, dispatch?: any): void {
-      //@ts-ignore
-        let NewState = state.Header;
-        NewState.Count += 1;
-        // dispatch to parent store
-          dispatch({
-              type: 'Header_Update',
-              payload: {
-                NewSettings: NewState,
-              },
-        });
-    }
+    public static async AddCount(state: HeaderState, dispatch?: any): Promise<HeaderState> {
+      if(state.Header == undefined)
+        state.Header = new Header_codebehind().CurrentState;
+      // the new codebehind state that this function will dispatch by default
+      let NewState:HeaderState = state.Header;
+      // ** perform operations on the NewState here **
+      // ** you can dispatch to any of the connected codebehind stores **  
+      NewState.Count += 1;
 
+      // ** 
+      // dispatch to the store - if dispatch variable is provided 
+      if(dispatch != undefined)
+        dispatch({ type: 'Header_Update', payload: { NewSettings: NewState } });
+      
+      return NewState;
+    }
+    //!!nextfunction
+
+
+    /*******************************  %100 code-gen below here   *******************************/
     // constructor
     public Header_codebehind(state: HeaderState){
         this.CurrentState = state;
@@ -59,7 +65,16 @@ export default class Header_codebehind implements IScreenController {
       // make functions available to the front-end
       public mapDispatchToProps = (dispatch: any) => {
         return {
-          AddCount: (state: HeaderState) => {Header_codebehind.AddCount(state, dispatch)} 
+          AddCount: async (state: HeaderState) => {await Header_codebehind.AddCount(state, dispatch)} 
+          //!!nextdispatchprop 
         }
+      }
+
+      // ### connect to the SessionStore here (as little as possible for performance)
+      public mapStateToProps = (SessionStore: any, ownProps: any) => {
+          return {
+            Header: SessionStore.Header,
+              //!!nextsessionstoreconnection
+          }
       }
 }

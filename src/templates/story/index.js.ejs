@@ -1,0 +1,17 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import { TouchableHighlight } from 'react-native';
+
+export default function <%=props.name%>({ onPress, children }) {
+  return <TouchableHighlight onPress={onPress}>{children}</TouchableHighlight>;
+}
+
+<%=props.name%>.defaultProps = {
+  children: null,
+  onPress: () => {},
+};
+
+<%=props.name%>.propTypes = {
+  children: PropTypes.node,
+  onPress: PropTypes.func,
+};

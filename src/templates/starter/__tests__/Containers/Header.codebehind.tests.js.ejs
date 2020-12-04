@@ -1,0 +1,24 @@
+/**
+ * @format
+ */
+
+import 'react-native';
+import React from 'react';
+import Header_codebehind, {
+  HeaderState,
+} from '../../Containers/Header/Header.codebehind';
+import Header from '../../Containers/Header/Header';
+
+it('Header - AddCount', async () => {
+  // instantiate the codebehind class to test
+  var HeaderTestClass = new Header_codebehind();
+
+  // use the static functions to operate the data
+  var UpdatedState = await Header_codebehind.AddCount(
+    HeaderTestClass.CurrentState,
+  );
+
+  expect(UpdatedState.Count).toBeGreaterThan(
+    HeaderTestClass.CurrentState.Count,
+  );
+});

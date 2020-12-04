@@ -1,0 +1,23 @@
+/**
+ * @format -- using TS to enable better debugger stepping - Use VSCode Jest plugin from Orta and Debug tab to debug.  You can set breakpoints in VSCode. 
+ * Use 'npm test' to run code coverage report for application. 
+ */
+
+import 'react-native';
+import React from 'react';
+import <%=props.name%>_codebehind, {
+    <%=props.name%>State,
+} from '../../Containers/<%=props.name%>/<%=props.name%>.codebehind';
+import <%=props.name%> from '../../Containers/<%=props.name%>/<%=props.name%>';
+
+it('<%=props.name%> - AddCount', async () => {
+  // instantiate the codebehind class to test
+  var <%=props.name%>TestClass = new <%=props.name%>_codebehind();
+
+  // use the static functions to operate the data
+  var UpdatedState = <%=props.name%>_codebehind.AddCount(<%=props.name%>TestClass.CurrentState);
+
+  expect(UpdatedState.Count).toBeGreaterThan(
+    <%=props.name%>TestClass.CurrentState.Count,
+  );
+});

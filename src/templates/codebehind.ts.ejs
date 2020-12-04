@@ -1,77 +1,82 @@
-import { IScreenController } from '../../types';
+import { IScreenController } from '../../util/types';
 import {ActionConst, Actions} from 'react-native-router-flux';
+import { <%=props.name%>_Update, <%=props.name%>_Update_Action } from '../../util/actionTypes';
 //!!nextfileimport
 
 export interface <%=props.name%>State {
-    // # give your component properties here
-    VersionNumber: string;
-    ScreenName: string;
-    Count: number;
+  // # give your component properties here
+  VersionNumber: string;
+  ScreenName: string;
+  Count: number;
+  //!!nextproperty
 
-    // # code-gen below here
-    AddCount(props: <%=props.name%>State):void;
-    //!!nextinterfacefunction
-    <%=props.name%>?:<%=props.name%>State;
-    //!!nextinterfaceconnection
+  // # code-gen below here
+  AddCount(props: <%=props.name%>State):void;
+  //!!nextinterfacefunction
+
+  // connections to store
+  <%=props.name%>: <%=props.name%>State; // provided by the store 
+  //!!nextinterfaceconnection
 }
 
 export default class <%=props.name%>_codebehind implements IScreenController {
+    
+  // # assign a default state 
+  public CurrentState: <%=props.name%>State = {
+    VersionNumber: '0.0.1',
+    ScreenName: '<%=props.name%>',
+    Count: 0,
+    //!!nextdefaultstateproperty
 
-    // # assign a default state 
-    public CurrentState: <%=props.name%>State = {
-        VersionNumber: '0.0.1',
-        ScreenName: '<%=props.name%>',
-        Count: 0,
-        AddCount : <%=props.name%>_codebehind.AddCount,
-        //!!nextstatefunction
-    }
+    // SessionStore slice  provided by Store 
+    <%=props.name%>: undefined as any, 
+    //!!nextdefaultstateproperty
 
-    // ### put your codebehind-functions here - static functions implement business logic
-    public static AddCount(state: <%=props.name%>State, dispatch?: any): void {
-      let NewState = state.<%=props.name%>;
-      if(NewState != undefined){
-        NewState.Count += 1;
-        // dispatch to parent store
-          dispatch({
-              type: '<%=props.name%>_Update',
-              payload: {
-                NewSettings: NewState,
-              },
-        });
+    AddCount : <%=props.name%>_codebehind.AddCount,
+    //!!nextstatefunction
+  }
+
+  // ### put your codebehind-functions here - static functions implement business logic
+  public static async AddCount(state: <%=props.name%>State, dispatch?: any): Promise<<%=props.name%>State> {
+    let NewState:<%=props.name%>State = state.<%=props.name%> as <%=props.name%>State;
+    // ** perform operations on the NewState here **
+    // ** you can dispatch to any of the connected codebehind stores **  
+    NewState.Count += 1;
+
+    // ** 
+    // dispatch to the store - if dispatch variable is provided (not provided in unit testing)
+    if(dispatch != undefined){
+      var action:<%=props.name%>_Update_Action = { type: <%=props.name%>_Update, payload: NewState}
+      dispatch(action);
+    }   
+    return NewState;
+  }
+  //!!nextfunction
+  
+  /*******************************  %100 code-gen below here   *******************************/
+  // listen to Update_<%=props.name%> dispatches
+  public reducer = (state = this.CurrentState, action: any = {type: {}, payload: {}}) => {
+      switch (action.type) {
+        case <%=props.name%>_Update:
+          return {...action.payload};
+        default:
+          return state;
+      }
+    };
+
+    // make functions available to the front-end
+    public mapDispatchToProps = (dispatch: any) => {
+      return {
+        AddCount: async (state: <%=props.name%>State) => {await <%=props.name%>_codebehind.AddCount(state, dispatch)},
+        //!!nextdispatchprop 
       }
     }
-    //!!nextfunction
 
-
-    /*******************************  %100 code-gen below here   *******************************/
-    // constructor
-    public <%=props.name%>_codebehind(state: <%=props.name%>State){
-        this.CurrentState = state;
-    }
-
-    // listen to Update_<%=props.name%> dispatches
-    public reducer = (state = this.CurrentState, action: any = {type: {}, payload: {}}) => {
-        switch (action.type) {
-          case '<%=props.name%>_Update':
-            return {...action.payload.NewSettings};
-          default:
-            return state;
-        }
-      };
-
-      // make functions available to the front-end
-      public mapDispatchToProps = (dispatch: any) => {
+    // ### connect to the SessionStore here (as little as possible for performance)
+    public mapStateToProps = (SessionStore: any, ownProps: any) => {
         return {
-          AddCount: (state: <%=props.name%>State) => {<%=props.name%>_codebehind.AddCount(state, dispatch)},
-          //!!nextdispatchprop 
+          <%=props.name%>: SessionStore.<%=props.name%>,
+            //!!nextsessionstoreconnection
         }
-      }
-
-      // ### connect to the SessionStore here (as little as possible for performance)
-      public mapStateToProps = (SessionStore: any, ownProps: any) => {
-          return {
-            <%=props.name%>S: SessionStore.<%=props.name%>S,
-              //!!nextsessionstoreconnection
-          }
-      }
+    }
 }

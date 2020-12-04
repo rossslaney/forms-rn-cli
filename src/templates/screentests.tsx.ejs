@@ -1,0 +1,82 @@
+/**
+ * @format
+ */
+
+import 'react-native';
+import React from 'react';
+import {Provider, connect} from 'react-redux';
+import {render, fireEvent} from '@testing-library/react-native';
+import <%=props.name%>_codebehind, {
+  <%=props.name%>State,
+} from '../../src/Screens/<%=props.name%>/<%=props.name%>.codebehind';
+import <%=props.name%> from '../../src/Screens/<%=props.name%>/<%=props.name%>';
+import {store} from '../../src/App';
+
+it('<%=props.name%> - Renders Default State', () => {
+  // a) Arrange
+  // instantiate codebehind class
+  const <%=props.name%>TestClass = new <%=props.name%>_codebehind();
+  // get codebehind default state
+  const defaultState = <%=props.name%>TestClass.CurrentState;
+
+  // b) Act
+  // verify the component renders with default state
+  const {getByTestId} = render(
+    <Provider store={store}>
+      <<%=props.name%> />
+    </Provider>,
+  );
+
+  // c) Assert
+  expect(getByTestId('<%=props.name%>Screen')).not.toBeNull();
+});
+
+//********************************************************
+// ** Codebehind function: AddCount
+
+// 1) ensure the codebehind function works as expected
+it('<%=props.name%> - AddCount - Returns Expected Value', async () => {
+  // a) Arrange
+  // instantiate codebehind class
+  const <%=props.name%>TestClass = new <%=props.name%>_codebehind();
+  // get codebehind default state
+  const defaultState = <%=props.name%>TestClass.CurrentState;
+  // store the value to check against in const
+  const valToCheck = defaultState.Count;
+  // create the mock props for the component -- will need to manually add connected slices
+  const <%=props.name%>MockProps = {<%=props.name%>: defaultState} as <%=props.name%>State;
+
+  // b) Act
+  const ManipulatedState = await <%=props.name%>_codebehind.AddCount(<%=props.name%>MockProps);
+
+  // c) Assert
+  expect(ManipulatedState.Count).toEqual(valToCheck + 1);
+});
+
+// 2) AddCount End-To-End test
+it('<%=props.name%> - AddCount - E2E', async () => {
+  // a) Arrange
+  // instantiate codebehind class
+  const <%=props.name%>TestClass = new <%=props.name%>_codebehind();
+  // get codebehind default state
+  const defaultState = <%=props.name%>TestClass.CurrentState;
+  // store the value to check against in const
+  const valToCheck = defaultState.Count;
+
+  // b) Act
+  const rendered = render(
+    <Provider store={store}>
+      <<%=props.name%> />
+    </Provider>,
+  );
+  const btn = rendered.getByTestId('btn_AddCount');
+  // simulate the UI event to dispatch
+  await fireEvent(btn, 'press');
+
+  // c) Assert
+  expect(store.getState().<%=props.name%>.Count).toEqual(valToCheck + 1);
+});
+//
+// End AddCount tests
+//********************************************************
+//!!nextcodebehindtesthere
