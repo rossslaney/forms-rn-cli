@@ -4,10 +4,8 @@ import {connect} from 'react-redux';
 import {Actions} from 'react-native-router-flux';
 
 //@ts-ignore
-import CardView from 'react-native-cardview';
 import <%=props.name%>_codebehind, {<%=props.name%>State} from './<%=props.name%>.codebehind';
 import actualDimensions from '../../util/dimensions';
-import StorybookUIRoot from '../../../storybook';
 
 export const <%=props.name%>: React.FC<<%=props.name%>State> = (props: <%=props.name%>State) => {
   return (

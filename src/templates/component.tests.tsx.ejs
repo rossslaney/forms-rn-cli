@@ -1,0 +1,33 @@
+/**
+ * @format
+ */
+
+import 'react-native';
+import React from 'react';
+import {render, fireEvent} from '@testing-library/react-native';
+import {<%=props.name%>, <%=props.name%>State} from '../../src/Components/<%=props.name%>';
+import {Text, View} from 'react-native';
+
+it('<%=props.name%> - Renders Default State', () => {
+  var <%=props.name%>Props: <%=props.name%>State = {
+    OnPress: () => {
+      console.log('onpress called from <%=props.name%>');
+    },
+    children: (
+      <Text
+        style={{color: 'white', fontWeight: 'bold', fontFamily: 'Gill Sans'}}>
+        BTN
+      </Text>
+    ),
+    Count: 0,
+  };
+
+  var component = <%=props.name%>(<%=props.name%>Props);
+
+  // b) Act
+  // verify the component renders with default state
+  const {getByTestId} = render(<View>{component}</View>);
+
+  // c) Assert
+  expect(getByTestId('<%=props.name%>Component')).not.toBeNull();
+});

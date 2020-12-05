@@ -1,0 +1,28 @@
+import {storiesOf} from '@storybook/react-native';
+import React from 'react';
+import {Text, View} from 'react-native';
+import CenterView from '../CenterView';
+import {
+  <%=props.name%>,
+  <%=props.name%>State,
+} from '../../../src/Components/<%=props.name%>';
+
+storiesOf('<%=props.name%>', module)
+  //@ts-ignore
+  .addDecorator(getStory => <CenterView>{getStory()}</CenterView>)
+  .add('default state', () => {
+    var <%=props.name%>Props: <%=props.name%>State = {
+      OnPress: () => {
+        console.log('onpress called from <%=props.name%>');
+      },
+      children: (
+        <Text
+          style={{color: 'white', fontWeight: 'bold', fontFamily: 'Gill Sans'}}>
+          <%=props.name%>
+        </Text>
+      ),
+      Count: 0,
+    };
+
+    return <%=props.name%>(<%=props.name%>Props);
+  });

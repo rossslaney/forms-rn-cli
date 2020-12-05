@@ -1,6 +1,6 @@
 # forms-rn-cli
 
-An opinionated CLI for React-Redux applications in React Native that aims to take away the boilerplate from developing react-redux applications. Inspired by ASP.NET Web Forms - Each 'Screen' or 'Container' has a 'codebehind' file where you define the function available to that front-end component as well as what connections that component will have to the SessionStore.
+An opinionated CLI for React-Redux applications in React Native that aims to take away the boilerplate from developing react-redux applications. Inspired by ASP.NET Web Forms - Each 'Screen' or 'Container' has a 'codebehind' file where you define the function available to that front-end component as well as what connections that component will have to the SessionStore The template application is set up with 100% code coverage and storybook stories for each component. The cli tool will generate the application boilerplate in such a way that you can maintain full test coverage of the 'codebehind' and the react components, including unit testing, E2E testing with react-native-testing-library, and visual testing with storybook.
 
 —————————
 
@@ -47,7 +47,7 @@ Place the 'Container' anywhere in your application markup <NameOfContainer />
 
 > forms-rn-cli add-container [NameOfContainer]
 
-Place the 'Container' anywhere in your application markup <NameOfContainer />
+Place the 'Component' anywhere in your application markup <NameOfComponent />
 
 ### Add a 'Service'
 
