@@ -71,7 +71,7 @@ To use the new function:
 
 example usage:
 
-> forms-rn-cli create-codebehind-function ./src/Screens/Home/Home.codebehind.ts SubtractCount Home
+> forms-rn-cli create-codebehind-function ./src/Screens/Home/Home.codebehind.ts SubtractCount Home ./**tests**/Screens/Home.tests.tsx
 
 ### Create a 'CodeBehind Connection'
 
