@@ -71,7 +71,7 @@ To use the new function:
 
 example usage:
 
-> forms-rn-cli create-codebehind-function ./Screens/Home/Home.codebehind.ts SubtractCount Home
+> forms-rn-cli create-codebehind-function ./src/Screens/Home/Home.codebehind.ts SubtractCount Home
 
 ### Create a 'CodeBehind Connection'
 
@@ -79,7 +79,7 @@ Connect the codebehind to the State Tree. To ensure performance it is best pract
 
 > forms-rn-cli create-codebehind-connection [PathCodeBehindFile][nameofnewconnectioncodebehind] [PathToNewConnectionCodeBehind]
 >
-> e.g. : forms-rn-cli create-codebehind-connection ./Screens/Home/Home.codebehind.ts Entity ../../services/entity/entity.codebehind
+> e.g. : forms-rn-cli create-codebehind-connection ./src/Screens/Home/Home.codebehind.ts Entity ../../services/entity/entity.codebehind
 >
 > Use the new connection (Home.tsx) :
 > console.log('entity test: ', props.Entity);

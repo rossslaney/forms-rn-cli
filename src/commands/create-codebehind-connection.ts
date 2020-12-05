@@ -6,7 +6,7 @@ const AddSessionStoreConnectionToCodeBehindFile = async (codebehindPath: string,
   const results = replace.sync({
     files: codebehindPath,
     from: '//!!nextsessionstoreconnection',
-    to: SessionStoreSlice + ": SessionStore." + SessionStoreSlice + ",\n\t\t\t\t\t\t" +
+    to: SessionStoreSlice + ": SessionStore." + SessionStoreSlice + ",\n\t\t\t\t\t" +
     "//!!nextsessionstoreconnection", 
     countMatches: true,
   });
@@ -35,6 +35,17 @@ const add_nextfileimport = async (codebehindPath: string, SessionStoreSlice: str
   console.log('add_nextfileimport: ', results);
 }
 
+const add_nextconnectiondef = async (codebehindPath: string, SessionStoreSlice: string, SessionStoreSliceCodeBehindPath: string) => {
+  const results = replace.sync({
+    files: codebehindPath,
+    from: '//!!nextconnectiondef',
+    to: SessionStoreSlice +": undefined as any," + "\n\t\t" +
+    "//!!nextconnectiondef", 
+    countMatches: true,
+  });
+  console.log('add_nextfileimport: ', results);
+}
+
 module.exports = {
   name: 'create-codebehind-connection',
   run: async (toolbox: GluegunToolbox) => {
@@ -43,9 +54,14 @@ module.exports = {
       print: { info },
     } = toolbox
 
-    AddSessionStoreConnectionToCodeBehindFile(parameters.first, parameters.second);
-    add_nextinterfaceconnection(parameters.first, parameters.second);
+
     add_nextfileimport(parameters.first, parameters.second, parameters.third);
+    add_nextinterfaceconnection(parameters.first, parameters.second);
+
+    add_nextconnectiondef(parameters.first, parameters.second, parameters.third);
+
+    // ---- old
+    AddSessionStoreConnectionToCodeBehindFile(parameters.first, parameters.second);
     info(`Added sessions store connection to slice`)
   },
 }
