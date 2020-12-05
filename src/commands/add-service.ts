@@ -2,32 +2,31 @@
 import { GluegunToolbox } from 'gluegun'
 const replace = require('replace-in-file');
 
-const AddServiceImportToApp = async (name: string) => {
+const AddContainerImportToApp = async (name: string) => {
   const results = replace.sync({
-    files: 'app.tsx',
+    files: 'src/app.tsx',
     from: '//!!nextimport',
     to: "import " + name + "_codebehind from './Services/" + name + "/" + name + ".codebehind';\n" +
     "//!!nextimport", 
     countMatches: true,
   });
-  console.log('replace import Service: ', results);
+  console.log('replace import Services: ', results);
 }
-
 
 const AddControllerToApp = async (name: string) => {
   const results = replace.sync({
-    files: 'app.tsx',
+    files: 'src/app.tsx',
     from: '//!!nextcontroller',
     to: "let " + name + "_controller = new " + name + "_codebehind();\n" + 
     "//!!nextcontroller", 
     countMatches: true,
   });
-  console.log('add controller: ', results);
+  console.log('add AddControllerToApp: ', results);
 }
 
 const AddReducerToApp = async (name: string) => {
   const results = replace.sync({
-    files: 'app.tsx',
+    files: 'src/app.tsx',
     from: '//!!nextreducer',
     to: name + ": " + name + "_controller.reducer,\n\t\t" + 
     "//!!nextreducer", 
@@ -38,14 +37,54 @@ const AddReducerToApp = async (name: string) => {
 
 const AddPropToApp = async (name: string) => {
   const results = replace.sync({
-    files: 'app.tsx',
+    files: 'src/app.tsx',
     from: '//!!nextprop',
     to: name + ": " + name + "_controller.reducer,\n\t\t" + 
     "//!!nextprop", 
     countMatches: true,
   });
-  console.log('add reducer: ', results);
+  console.log('add prop: ', results);
 }
+
+const AddServiceStateImportToActionTypes = async (name: string) => {
+  const results = replace.sync({
+    files: 'src/util/actionTypes.ts',
+    from: '//!!nextstateimport',
+    to: "import { " + name + "State } from '../Services/"+ name + "/" + name + ".codebehind';\n" + 
+    "//!!nextstateimport", 
+    countMatches: true,
+  });
+  console.log('AddServiceStateImportToActionTypes: ', results);
+}
+
+const AddDefToActionTypes = async (name: string) => {
+  const results = replace.sync({
+    files: 'src/util/actionTypes.ts',
+    from: '//!!nextdefinition',
+    to: "export const " + name + "_Update = '" + name + "_Update';\n" + 
+    "//!!nextdefinition", 
+    countMatches: true,
+  });
+  console.log('AddDefToActionTypes: ', results);
+}
+
+
+const AddActionTypes = async (name: string) => {
+  const results = replace.sync({
+    files: 'src/util/actionTypes.ts',
+    from: '//!!nextactiontype',
+    to: "export interface " + name + "_Update_Action { type: typeof " + name +"_Update, payload: " + name + "State}\n" + 
+    "//!!nextactiontype", 
+    countMatches: true,
+  });
+  console.log('AddActionTypes: ', results);
+}
+
+export const AddContainerActionTypeToApp = async (name: string) => {
+  AddServiceStateImportToActionTypes(name);
+  AddDefToActionTypes(name);
+  AddActionTypes(name);
+} 
 
 module.exports = {
   name: 'add-service',
@@ -54,17 +93,26 @@ module.exports = {
     const name = parameters.first
 
     await template.generate({
-      template: `codebehind.ts.ejs`,
-      target: `Services/${name}/${name}.codebehind.ts`,
+      template: `service.ts.ejs`,
+      target: `src/Services/${name}/${name}.codebehind.ts`,
       props: { name }
     })
-
-    // 1) add the import of the newly generated files
-    AddServiceImportToApp(name);
-    // 3) add the codebehind controller line and add to the appReducer and mapStateToProps
+    
+    // add the Action definitions 
+    AddContainerActionTypeToApp(name);
+    AddContainerImportToApp(name);
     AddControllerToApp(name);
     AddReducerToApp(name);
     AddPropToApp(name);
-    print.info('Generated service and codebehind file.')
+
+    // generate the tests file __tests__/Screens/name.tests.tsx from template
+    await template.generate({
+      template: 'servicetests.tsx.ejs',
+      target: `__tests__/Services/${name}.tests.tsx`,
+      props: { name }
+    })
+
+
+    print.info('Generated service codebehind and tests')
   },
 }
