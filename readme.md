@@ -1,6 +1,8 @@
 # forms-rn-cli
 
-An opinionated CLI for React-Redux applications in React Native that aims to take away the boilerplate from developing react-redux applications. Inspired by ASP.NET Web Forms - Each 'Screen' or 'Container' has a 'codebehind' file where you define the function available to that front-end component as well as what connections that component will have to the SessionStore.
+A opinionated CLI for React-Redux applications in React Native that aims to take away the boilerplate from developing react-redux applications. Inspired by ASP.NET Web Forms - Each 'Screen' or 'Container' has a 'codebehind' file where you define the function available to that front-end component as well as what connections that component will have to the SessionStore.
+
+—————————
 
 ## Create a New FormsRN Project
 
@@ -11,48 +13,57 @@ An opinionated CLI for React-Redux applications in React Native that aims to tak
 > npx react-native start --reset-cache  
 > npx react-native run-ios
 
-The starter app will come with the following pre-configured:
+### The starter app will come with the following pre-configured:
 
 > AuthService -> 'Service' demo to authenticate requests for data with AD B2C (just plug your own ADB2C settings into authsettings.json)  
-> EntityService -> 'Service' demo to request data entities from an API (sample API is set up and free to use)  
-> SplashScreen -> 'Screen' demo of a typical splash screen an entry point for your new FormsRN App.  
-> MoreInfoScreen -> 'Screen' demo to show non-restricted navigation from the Splash 'Screen'.  
-> HomeScreen -> 'Screen' demo requires an authenticated user to access this 'Screen' / demonstrates the codebehind connection to EntityService in SessionStore and displays the demo data entities.  
+> HomeScreen -> 'Screen' demo with examples for dispatching actions to the store.  
+> Splash -> 'Screen' demo with examples of authorizing a user.  
 > ScreenHeaderContainer -> 'Container' demo used to show a dynamic header on each 'Screen'  
-> DataCard -> 'DumbComponent' demo used to show a simple visual component
+> RoundButton -> ‘Component demo used to show a simple visual component.
+
+—————————
 
 ## Set up Azure B2C Auth:
 
 > Create an Azure AD B2C application for iOS in the Azure Portal and register a redirect URI for your application. It should be in the following format: msauth.[BUNDLE_ID]://auth  
+> The azure ADB2C application should return an email claim with the access token.  
 > copy and adjust the app name from 'example' to your app name in AppDelegate.m file from example: https://raw.githubusercontent.com/stashenergy/react-native-msal/master/example/ios/example/AppDelegate.m  
 > copy and adjust the app name from 'example' to your app name info.plist from example: https://raw.githubusercontent.com/stashenergy/react-native-msal/master/example/ios/example/Info.plist  
 > update the b2cConfig and b2cScopes in msalConfig.ts  
 > Open the ios/[projectname]/xcworkspace file, go to Signing & Capabilities, and add a Keychain Sharing capability. Add an entry to the Keychain Groups:  
 > com.microsoft.adalcache
 
-### Optionally Remove Auth Features:
+—————————
 
-Simply remove the Auth functions from the splash and entity codebehind files ->
+## Commands
 
-> e.g. delete this from Splash.codebehind -> await Auth_codebehind.HandleSignInPress(state.Auth as AuthState, dispatch);
+### Add a 'Screen'
 
-## Add a 'Screen'
-
-Add a new 'Screen' and associated codebehind file connected to the SessionStore in App.tsx.
+‘Screen’ and associated codebehind boilerplate generated and connected to the SessionStore in App.tsx.
+Test and Storybook boilerplate will be generated as well.
 
 > forms-rn-cli add-screen [NameOfScreen]
 
-## Add a 'Container'
+### Add a 'Container'
 
-Add a new 'Container' and associated codebehind file connected to the SessionStore in App.tsx.
+‘Container’ and associated codebehind boilerplate generated and connected to the SessionStore in App.tsx.
+Test and Storybook boilerplate will be generated as well.
 
 > forms-rn-cli add-container [NameOfContainer]
 
-Place the 'Container' anywhere in your application markup <[NameOfContainer] />
+Place the 'Container' anywhere in your application markup <NameOfContainer />
 
-## Add a 'Service'
+### Add a ‘Component’
 
-Add a new 'Service' - these are connected to the Session Store and have functions that can be called from other codebehind files but do not have a visual component.
+‘Component’ and associated codebehind boilerplate generated. Test and Storybook boilerplate will be generated as well.
+
+> forms-rn-cli add-container [NameOfContainer]
+
+Place the 'Container' anywhere in your application markup <NameOfContainer />
+
+### Add a 'Service'
+
+Add a new 'Service' - these are connected to the Session Store and have functions that can be called from other codebehind files but do not have a visual component. Test files are generated as well.
 
 > forms-rn-cli add-service [NameOfService]
 
@@ -60,7 +71,7 @@ Call the service from codebehind:
 
 > var newEntityControllerState = await EntityController.Fetch_Entities(a,b,c,dispatch)
 
-## Create a 'CodeBehind Function'
+### Create a 'CodeBehind Function'
 
 Make a function available from the codebehind to the front-end:
 
@@ -74,7 +85,7 @@ example usage:
 
 > forms-rn-cli create-codebehind-function ./Screens/Home/Home.codebehind.ts SubtractCount Home
 
-## Create a 'CodeBehind Connection'
+### Create a 'CodeBehind Connection'
 
 Connect the codebehind to the State Tree. To ensure performance it is best practice to keep connections to the fewest needed for the component to work.
 
@@ -85,10 +96,57 @@ Connect the codebehind to the State Tree. To ensure performance it is best pract
 > Use the new connection (Home.tsx) :
 > console.log('entity test: ', props.Entity);
 
+—————————
+
+## Run Tests and Code Coverage:
+
+npm test
+
+—————————
+
+## Run the App
+
+### Start app server for local dev.
+
+> ENVFILE=.env.development node node_modules/react-native/local-cli/cli.js start
+
+### Start app for iOS local dev.
+
+> ENVFILE=.env.development npx react-native run-ios --simulator="iPhone 8”.
+
+### Start storybook server.
+
+> npx start-storybook -p 7007.
+
+### Start storybook device
+
+ENVFILE=.env.storybook npx react-native run-ios --simulator="iPhone 11”
+
+> (Make sure that react-native debugging is disabled on storybook device to enable dev simultaneously, reload the iOS dev device and you should be able to run both at the same time)
+
+### Start Dev Servers and Devices
+
+ext install fabiospampinato.vscode-terminals
+
+> Terminals: Run
+> Terminals: Kill // Kill all the terminals
+
+### Start app for staging
+
+> ENVFILE=.env.development npx react-native run-ios
+
+### Start app for production.
+
+> ENVFILE=.env.production npx react-native run-ios
+
+—————————
+
 ## Using the ReduxRouter Navigation
 
 Add the scene to the nav tree in App.tsx  
 Actions.ScreenName() or Actions.push('ScreenName') is available from any codebehind file.
+
+—————————
 
 ## Terminology
 
