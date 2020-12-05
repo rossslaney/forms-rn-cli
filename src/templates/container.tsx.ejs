@@ -1,45 +1,88 @@
 import React from 'react';
-import {
-  Button,
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  TouchableOpacity,
-  ImageBackground,
-  ScrollView,
-} from 'react-native';
-import {Provider, connect} from 'react-redux';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {connect} from 'react-redux';
 import {Actions} from 'react-native-router-flux';
 
 //@ts-ignore
 import CardView from 'react-native-cardview';
-import { <%=props.name%>State } from './<%=props.name%>.codebehind';
-import <%=props.name%>_codebehind from './<%=props.name%>.codebehind';
+import <%=props.name%>_codebehind, {<%=props.name%>State} from './<%=props.name%>.codebehind';
 import actualDimensions from '../../util/dimensions';
+import StorybookUIRoot from '../../../storybook';
 
-const <%=props.name%>: React.FC<<%=props.name%>State> = (
-    props: <%=props.name%>State,
-  ) => {
-    return (
-      <View style={{height: '15%', width: '100%', borderWidth: 1, backgroundColor: 'yellow'}}>
-        <Text
-          style={{
-            position: 'absolute',
-            bottom: 10,
-            color: 'grey',
-            alignSelf: 'center',
-          }}>
-          <%=props.name%> Container
-        </Text>
+export const <%=props.name%>: React.FC<<%=props.name%>State> = (props: <%=props.name%>State) => {
+  return (
+    <View testID="<%=props.name%>Container" style={styles.container}>
+      <Text style={styles.versionNum}>{props.VersionNumber}</Text>
+      <View>
+        <Text style={styles.title}>Container : {props.<%=props.name%>.ScreenName}</Text>
       </View>
-    );
-  };
-  
-  let codebehind = new <%=props.name%>_codebehind();
-  export default connect(
-    codebehind.mapStateToProps,
-    codebehind.mapDispatchToProps,
-  )(<%=props.name%>);
+      <View>
+        <TouchableOpacity
+        testID={'btn_AddCount'}
+        onPress={() => {
+          props.AddCount(props);
+        }}
+        style={styles.button}>
+        <Text style={styles.buttonText}>AddCount: {props.<%=props.name%>.Count}</Text>
+      </TouchableOpacity>
+      </View>
+      <Text style={styles.bottomText}>
+        <%=props.name%> Container initiated with Forms RN Scaffolding CLI
+      </Text>
+    </View>
+  );
+};
 
+const styles = StyleSheet.create({
+  container: {
+    width: actualDimensions.width,
+    borderWidth: 2,
+    borderColor: '#ff6a00',
+    padding: 2,
+    backgroundColor: '#ffffef',
+  },
+  versionNum: {
+    position: 'absolute',
+    top: 5,
+    right: 25,
+  },
+  title: {
+    fontSize: actualDimensions.height / 60,
+    fontWeight: 'bold',
+    fontFamily: 'Gill Sans',
+    color: '#ff6a00',
+    textShadowColor: 'rgba(0, 0, 0, 0.75)',
+    textShadowOffset: {width: -1, height: 1},
+    textShadowRadius: 3,
+  },
+  bottomText: {
+    position: 'absolute',
+    bottom: 5,
+    color: 'grey',
+    alignSelf: 'center',
+  },
+  button: {
+    width: actualDimensions.width / 3,
+    height: actualDimensions.height / 30,
+    shadowOpacity: 0.3,
+    alignSelf: 'center',
+    backgroundColor: '#ff6a00',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 5,
+    margin: '10%'
+  },
+  buttonText: {
+    fontFamily: 'Gill Sans',
+    fontSize: 8,
+    color: 'white',
+    fontWeight: 'bold',
+  },
+});
 
+// export default the connected component
+let codebehind = new <%=props.name%>_codebehind();
+export default connect(
+  codebehind.mapStateToProps,
+  codebehind.mapDispatchToProps,
+)(<%=props.name%>);

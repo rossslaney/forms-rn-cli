@@ -145,7 +145,7 @@ module.exports = {
 
     // generate the storybook folder for this component from template
     await template.generate({
-      template: '/story/component.stories.js.ejs',
+      template: '/story/screen.stories.js.ejs',
       target: `storybook/stories/${name}/${name}.stories.js`,
       props: { name }
     })
