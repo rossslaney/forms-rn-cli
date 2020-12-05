@@ -23,18 +23,6 @@ A opinionated CLI for React-Redux applications in React Native that aims to take
 
 —————————
 
-## Set up Azure B2C Auth:
-
-> Create an Azure AD B2C application for iOS in the Azure Portal and register a redirect URI for your application. It should be in the following format: msauth.[BUNDLE_ID]://auth  
-> The azure ADB2C application should return an email claim with the access token.  
-> copy and adjust the app name from 'example' to your app name in AppDelegate.m file from example: https://raw.githubusercontent.com/stashenergy/react-native-msal/master/example/ios/example/AppDelegate.m  
-> copy and adjust the app name from 'example' to your app name info.plist from example: https://raw.githubusercontent.com/stashenergy/react-native-msal/master/example/ios/example/Info.plist  
-> update the b2cConfig and b2cScopes in msalConfig.ts  
-> Open the ios/[projectname]/xcworkspace file, go to Signing & Capabilities, and add a Keychain Sharing capability. Add an entry to the Keychain Groups:  
-> com.microsoft.adalcache
-
-—————————
-
 ## Commands
 
 ### Add a 'Screen'
@@ -101,6 +89,18 @@ Connect the codebehind to the State Tree. To ensure performance it is best pract
 ## Run Tests and Code Coverage:
 
 npm test
+
+—————————
+
+## Set up Azure B2C Auth:
+
+> Create an Azure AD B2C application for iOS in the Azure Portal and register a redirect URI for your application. It should be in the following format: msauth.[BUNDLE_ID]://auth  
+> The azure ADB2C application should return an email claim with the access token.  
+> copy and adjust the app name from 'example' to your app name in AppDelegate.m file from example: https://raw.githubusercontent.com/stashenergy/react-native-msal/master/example/ios/example/AppDelegate.m  
+> copy and adjust the app name from 'example' to your app name info.plist from example: https://raw.githubusercontent.com/stashenergy/react-native-msal/master/example/ios/example/Info.plist  
+> update the b2cConfig and b2cScopes in msalConfig.ts  
+> Open the ios/[projectname]/xcworkspace file, go to Signing & Capabilities, and add a Keychain Sharing capability. Add an entry to the Keychain Groups:  
+> com.microsoft.adalcache
 
 —————————
 
