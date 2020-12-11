@@ -8,6 +8,9 @@ An opinionated CLI for React-Redux applications in React Native that aims to tak
 
 > place forms-rn-init directory inside your working directory  
 > forms-rn-cli init [ProjectName]
+> cd [ProjectName]  
+> npm install  
+> cd ios && pod install && cd ..
 
 ### The starter app will come with the following pre-configured:
 

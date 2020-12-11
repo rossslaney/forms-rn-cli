@@ -8,25 +8,33 @@ import CenterView from '../CenterView';
 import {Provider, connect} from 'react-redux';
 import <%=props.name%>_codebehind, {
   <%=props.name%>State,
-} from '../../../src/Containers/<%=props.name%>/<%=props.name%>.codebehind';
-import {<%=props.name%>} from '../../../src/Containers/<%=props.name%>/<%=props.name%>';
+} from '../../../src/Screens/<%=props.name%>/<%=props.name%>.codebehind';
+import <%=props.name%> from '../../../src/Screens/<%=props.name%>/<%=props.name%>';
+import {Auth_Update, <%=props.name%>_Update} from '../../../src/util/actionTypes';
+import {AuthState} from '../../../src/Services/Auth/Auth.codebehind';
 
 storiesOf('<%=props.name%>', module)
   //@ts-ignore
-  .addDecorator(getStory => <CenterView>{getStory()}</CenterView>)
-  .add('default state', () => {
-    // instantiate codebehind class
-    const <%=props.name%>TestClass = new <%=props.name%>_codebehind();
-    // get codebehind default state
-    const defaultState = <%=props.name%>TestClass.CurrentState;
-
+  .addDecorator(getStory => <Provider store={store}>{getStory()}</Provider>)
+  .add('loading', () => {
+    // you can dispatch the state-to-test for the component
+    // ahead of the story
+    store.dispatch({
+      type: <%=props.name%>_Update,
+      payload: {
+        ...store.getState().<%=props.name%>,
+        VersionNumber: 'CONTRACTOR',
+      } as <%=props.name%>State,
+    });
+    // Containers receive props from connected services
+    // we can dispatch an update to the connected services to ahead of the story
+    store.dispatch({
+      type: Auth_Update,
+      payload: {
+        ...store.getState().Auth,
+        AppMode: 'CONTRACTOR',
+      } as AuthState,
+    });
     // manipulate the component state
-
-    // create the mock props for the component -- will need to manually add connected slices
-    let <%=props.name%>MockProps = {
-      ...defaultState,
-      <%=props.name%>: defaultState,
-    }// as <%=props.name%>State;
-
-    return <%=props.name%>(<%=props.name%>MockProps);
+    return <<%=props.name%> />;
   });
