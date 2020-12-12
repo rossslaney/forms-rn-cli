@@ -16,6 +16,9 @@ import {AuthState} from '../../../src/Services/Auth/Auth.codebehind';
 storiesOf('<%=props.name%>', module)
   //@ts-ignore
   .addDecorator(getStory => <Provider store={store}>{getStory()}</Provider>)
+  .add('default state', () => {
+    return <<%=props.name%> />;
+  })
   .add('loading', () => {
     // you can dispatch the state-to-test for the component
     // ahead of the story
